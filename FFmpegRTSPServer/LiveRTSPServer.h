@@ -12,25 +12,25 @@
 #include <liveMedia.hh>
 #include "LiveServerMediaSubsession.h"
 #include "FFmpegH264Source.h"
-#include "FFmpegH264Encoder.h"
 #include "G711AudioStreamServerMediaSubsession.hh"
 #include "AdtsAACAudioStreamServerMediaSubsession.h"
 
 namespace MESAI {
 
-	class LiveRTSPServer
-	{
-	public:
+    class LiveRTSPServer
+    {
+    public:
 
-		LiveRTSPServer(FFmpegH264Encoder  * a_Encoder, int port, int httpPort );
-		~LiveRTSPServer();
-		void run();
+        LiveRTSPServer(int port, int httpPort );
+        LiveRTSPServer(RecvMulticastDataModule* MulticastModule, int port, int httpPort );
+        ~LiveRTSPServer();
+        void run();
 
-	private:
-		int portNumber;
-		int httpTunnelingPort;
-		FFmpegH264Encoder * m_Encoder;
-		char quit;
+    private:
+        int portNumber;
+        int httpTunnelingPort;
+        RecvMulticastDataModule* m_MulticastModule;
+        char quit;
 
-	};
+    };
 }

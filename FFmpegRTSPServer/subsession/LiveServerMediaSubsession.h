@@ -16,6 +16,8 @@
 #include <H264VideoStreamDiscreteFramer.hh>
 #include <UsageEnvironment.hh>
 #include <Groupsock.hh>
+#include "RecvMulticastDataModule.h"
+#include "FFmpegH264Source.h"
 
 namespace MESAI 
 {
@@ -23,16 +25,19 @@ namespace MESAI
   class LiveServerMediaSubsession: public OnDemandServerMediaSubsession
   {
     public:
-      static LiveServerMediaSubsession* createNew(UsageEnvironment& env, StreamReplicator* replicator);
-    
+      static LiveServerMediaSubsession* createNew(UsageEnvironment& env, StreamReplicator* replicator,
+                RecvMulticastDataModule* MulticastModule=NULL, Boolean reuseFirstSource=False);
+
     protected:
-      LiveServerMediaSubsession(UsageEnvironment& env, StreamReplicator* replicator)
-          : OnDemandServerMediaSubsession(env, False), m_replicator(replicator) {};
+      LiveServerMediaSubsession(UsageEnvironment& env, StreamReplicator* replicator,
+            RecvMulticastDataModule* MulticastModule=NULL,  Boolean reuseFirstSource=False)
+          : OnDemandServerMediaSubsession(env, reuseFirstSource), m_replicator(replicator),m_MulticastModule(MulticastModule) {};
       
       virtual FramedSource* createNewStreamSource(unsigned clientSessionId, unsigned& estBitrate);
       virtual RTPSink* createNewRTPSink(Groupsock* rtpGroupsock,  unsigned char rtpPayloadTypeIfDynamic, FramedSource* inputSource);    
 
       StreamReplicator * m_replicator;
+      RecvMulticastDataModule* m_MulticastModule;
   };
 
 }

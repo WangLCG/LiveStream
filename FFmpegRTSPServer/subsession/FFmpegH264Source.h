@@ -14,29 +14,30 @@
 #include <FramedSource.hh>
 #include <UsageEnvironment.hh>
 #include <Groupsock.hh>
-#include "FFmpegH264Encoder.h"
+#include "RecvMulticastDataModule.h"
 
 namespace MESAI
 {
     
   class FFmpegH264Source : public FramedSource {
   public:
-    static FFmpegH264Source* createNew(UsageEnvironment& env, FFmpegH264Encoder * E_Source);
-    FFmpegH264Source(UsageEnvironment& env, FFmpegH264Encoder *  E_Source);
+    static FFmpegH264Source* createNew(UsageEnvironment& env,     RecvMulticastDataModule* MulticastModule = NULL);
+    FFmpegH264Source(UsageEnvironment& env,  RecvMulticastDataModule* MulticastModule = NULL);
+
     ~FFmpegH264Source();
 
   private:
-    static void deliverFrameStub(void* clientData) {((FFmpegH264Source*) clientData)->deliverFrame();};
+    static void deliverFrameStub(void* clientData) {if(clientData)((FFmpegH264Source*) clientData)->deliverFrame();};
     virtual void doGetNextFrame();
     void deliverFrame();
     virtual void doStopGettingFrames();
     void onFrame();
-
+    static void DelayReadFrame(FramedSource* source);
     
   private:
-    FFmpegH264Encoder * Encoding_Source;
     EventTriggerId m_eventTriggerId;
-
+    RecvMulticastDataModule* m_MulticastModule;
+    
   };
 
 }

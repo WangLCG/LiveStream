@@ -10,20 +10,25 @@
 
 namespace MESAI
 {
-    FFmpegH264Source * FFmpegH264Source::createNew(UsageEnvironment& env, FFmpegH264Encoder * E_Source) {
-        return new FFmpegH264Source(env, E_Source);
+    FFmpegH264Source * FFmpegH264Source::createNew(UsageEnvironment& env,
+                    RecvMulticastDataModule* MulticastModule) 
+    {
+        return new FFmpegH264Source(env, MulticastModule);
     }
-
-    FFmpegH264Source::FFmpegH264Source(UsageEnvironment& env, FFmpegH264Encoder * E_Source) : FramedSource(env), Encoding_Source(E_Source)
+    
+    FFmpegH264Source::FFmpegH264Source(UsageEnvironment& env, 
+            RecvMulticastDataModule* MulticastModule): FramedSource(env), m_MulticastModule(MulticastModule)
     {
         m_eventTriggerId = envir().taskScheduler().createEventTrigger(FFmpegH264Source::deliverFrameStub);
         std::function<void()> callback1 = std::bind(&FFmpegH264Source::onFrame,this);
-        Encoding_Source -> setCallbackFunctionFrameIsReady(callback1);
+        m_MulticastModule -> setCallbackFunctionFrameIsReady(callback1);
+        
     }
 
     FFmpegH264Source::~FFmpegH264Source()
     {
-
+        cout << " FFmpegH264Source::~FFmpegH264Source() " << endl;
+        FramedSource::doStopGettingFrames();
     }
 
     void FFmpegH264Source::doStopGettingFrames()
@@ -41,50 +46,85 @@ namespace MESAI
         deliverFrame();
     }
 
+    void FFmpegH264Source::DelayReadFrame(FramedSource* source)
+    {
+        source->doGetNextFrame();
+    }
+        
     void FFmpegH264Source::deliverFrame()
     {
-        if (!isCurrentlyAwaitingData()) return; // we're not ready for the data yet
-
         static uint8_t* newFrameDataStart;
         static unsigned newFrameSize = 0;
 
-        /* get the data frame from the Encoding thread.. */
-        if (Encoding_Source->GetFrame(&newFrameDataStart, &newFrameSize))
+        MultiFrameInfo  video;
+        memset(&video, 0, sizeof(MultiFrameInfo));
+        m_MulticastModule->GetVideoFrame(video);
+        if(video.buf && video.buf_size > 0)
         {
-            if (newFrameDataStart!=NULL) 
+            //printf("File[%s]---[%d]: video.buf_size[%u] fMaxSize[%u]\n", __FUNCTION__, __LINE__, 
+            //    video.buf_size, fMaxSize);
+            
+            char* videoBuf = video.buf;
+            newFrameSize = video.buf_size;
+            unsigned short offset = 0;
+            
+            /* live555发送H264是不能包括 0x00000001 或 0x000001 起始码，需要去掉 */
+            if (newFrameSize >= 4 && videoBuf[0] == 0 && videoBuf[1] == 0 
+                && ((videoBuf[2] == 0 && videoBuf[3] == 1) || videoBuf[2] == 1))
             {
-                /* This should never happen, but check anyway.. */
-                if (newFrameSize > fMaxSize) 
+                //envir() << "H264or5VideoVideoSource error: MPEG 'start code' seen in the input\n";
+                if(videoBuf[2] == 0 && videoBuf[3] == 1)
                 {
-                    fFrameSize = fMaxSize;
-                    fNumTruncatedBytes = newFrameSize - fMaxSize;
-                } 
-                else 
-                {
-                    fFrameSize = newFrameSize;
+                    /* 0x00000001 */
+                    newFrameSize -= 4;
+                    offset = 4;
                 }
-
-                gettimeofday(&fPresentationTime, NULL);
-                memcpy(fTo, newFrameDataStart, fFrameSize);
-                
-                //delete newFrameDataStart;
-                //newFrameSize = 0;
-                
-                Encoding_Source->ReleaseFrame();
+                else
+                {
+                    newFrameSize -= 3;
+                    offset = 3;
+                }
             }
+            else
+            {
+                offset = 0;
+            }
+
+            bool IsTruncated = false;
+            if (newFrameSize > fMaxSize) 
+            {
+                fFrameSize = fMaxSize;
+                fNumTruncatedBytes = newFrameSize - fMaxSize;
+                IsTruncated = true;
+            } 
             else 
             {
-                fFrameSize=0;
-                fTo=NULL;
-                handleClosure(this);
+                fFrameSize = newFrameSize;
             }
-        }else
+
+            //printf("-------- newFrameSize[%d] fFrameSize[%d]-----\n", newFrameSize,fFrameSize);
+            gettimeofday(&fPresentationTime, NULL);
+            try
+            {
+                memcpy(fTo, video.buf + offset, fFrameSize);
+            }
+            catch (exception& e)
+            {
+                cout <<" memcpy CRITIC ISSUE !!!"<< e.what() << endl;
+            }
+            
+            if(!IsTruncated)
+            {
+               delete[] video.buf;
+            }
+        }
+        else
         {
             fFrameSize = 0;
         }
         
-        if(fFrameSize>0)
-            FramedSource::afterGetting(this);
-
+        nextTask() = envir().taskScheduler().scheduleDelayedTask(0,
+              (TaskFunc*)FramedSource::afterGetting, this);
+        
     }
 }

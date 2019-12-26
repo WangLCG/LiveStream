@@ -9,27 +9,34 @@
 #include "LiveRTSPServer.h"
 
 static void announceStream(RTSPServer* rtspServer, ServerMediaSession* sms,
-			   char const* streamName, char const* inputFileName);
+               char const* streamName, char const* inputFileName);
 
 namespace MESAI
 {
-	LiveRTSPServer::LiveRTSPServer( FFmpegH264Encoder * a_Encoder, int port, int httpPort )
-		: m_Encoder (a_Encoder), portNumber(port), httpTunnelingPort(httpPort)
-	{
-		quit = 0;
-	}
+    LiveRTSPServer::LiveRTSPServer(  int port, int httpPort )
+        : portNumber(port), httpTunnelingPort(httpPort)
+    {
+        quit = 0;
+    }
 
-	LiveRTSPServer::~LiveRTSPServer()
-	{
+    LiveRTSPServer::LiveRTSPServer(RecvMulticastDataModule* MulticastModule, 
+            int port, int httpPort )
+            : m_MulticastModule(MulticastModule), portNumber(port), httpTunnelingPort(httpPort)
+    {
+        quit = 0;
+    }
+    
+    LiveRTSPServer::~LiveRTSPServer()
+    {
 
-	}
+    }
 
-	void LiveRTSPServer::run()
-	{
-		TaskScheduler    *scheduler;
-		UsageEnvironment *env ;
-		char RTSP_Address[1024];
-		RTSP_Address[0]=0x00;
+    void LiveRTSPServer::run()
+    {
+        TaskScheduler    *scheduler;
+        UsageEnvironment *env ;
+        char RTSP_Address[1024];
+        RTSP_Address[0]=0x00;
 
         scheduler = BasicTaskScheduler::createNew();
         env = BasicUsageEnvironment::createNew(*scheduler);
@@ -41,49 +48,42 @@ namespace MESAI
         // 	authDB->addUserRecord(UserN, PassW);
         // }
         
-        OutPacketBuffer::maxSize = 2000000;
-        RTSPServer* rtspServer = RTSPServer::createNew(*env, portNumber, authDB);
+        OutPacketBuffer::maxSize = 2*1024*1024;
+        /* 第四个参数 0 ，表示一直保持连接，否则默认持续 65s 都没有rtsp的通信，就关掉rtsp socket */
+        RTSPServer* rtspServer = RTSPServer::createNew(*env, portNumber, authDB, 0);
         
         if (rtspServer == NULL)
         {
             *env <<"LIVE555: Failed to create RTSP server: "<<  env->getResultMsg() << "\n";
         }
-        else {
-            
-            
+        else
+        {
             if(httpTunnelingPort)
             {
                 rtspServer->setUpTunnelingOverHTTP(httpTunnelingPort);
             }
             
             char const* descriptionString = "MESAI Streaming Session";
-            
-            FFmpegH264Source * source = FFmpegH264Source::createNew(*env,m_Encoder);
-            StreamReplicator * inputDevice = StreamReplicator::createNew(*env, source, false);
-            
-            printf("RTSP_Address = %s \n");
+
+            //printf("RTSP_Address = %s \n");
             memset(RTSP_Address, 0, 1024);
-            
             snprintf(RTSP_Address, 1024, "%s", "ch0");
+
+            bool ReusedFirstSource = True;
+            
             ServerMediaSession* sms = ServerMediaSession::createNew(*env, RTSP_Address, RTSP_Address, descriptionString);
-            sms->addSubsession(MESAI::LiveServerMediaSubsession::createNew(*env, inputDevice));
-            sms->addSubsession( G711AudioStreamServerMediaSubsession::createNew(*env, false) );
-            //sms->addSubsession( AdtsAACAudioStreamServerMediaSubsession::createNew(*env, false) );
+            sms->addSubsession(MESAI::LiveServerMediaSubsession::createNew(*env, NULL,m_MulticastModule, ReusedFirstSource));
+            
+            //sms->addSubsession( G711AudioStreamServerMediaSubsession::createNew(*env, false) );
+            sms->addSubsession( AdtsAACAudioStreamServerMediaSubsession::createNew(*env, ReusedFirstSource, m_MulticastModule) );
             rtspServer->addServerMediaSession(sms);
             
             announceStream(rtspServer, sms, "ch0", "2.avi");
             
-            #if 0
-            char* url = rtspServer->rtspURL(sms);
-            *env << "Play this stream using the URL \"" << url << "\"\n";
-            delete [] url;
-            #endif
-
             //signal(SIGNIT,sighandler);
             env->taskScheduler().doEventLoop(&quit); // does not return
             
             Medium::close(rtspServer);
-            Medium::close(inputDevice);
         }
         
         env->reclaim();

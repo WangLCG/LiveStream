@@ -10,9 +10,14 @@ class AdtsAACAudioStreamServerMediaSubsession : public ADTSAudioFileServerMediaS
 public:
   static AdtsAACAudioStreamServerMediaSubsession*
   createNew(UsageEnvironment& env,  Boolean reuseFirstSource);
+  static AdtsAACAudioStreamServerMediaSubsession* createNew(UsageEnvironment& env,    Boolean reuseFirstSource,
+          RecvMulticastDataModule* MulticastModule);
 
 protected:
     AdtsAACAudioStreamServerMediaSubsession(UsageEnvironment& env, Boolean reuseFirstSource);
+    AdtsAACAudioStreamServerMediaSubsession(UsageEnvironment &env, Boolean reuseFirstSource, 
+        RecvMulticastDataModule* MulticastModule);
+    
     ~AdtsAACAudioStreamServerMediaSubsession();
 
 private:
@@ -25,6 +30,8 @@ protected: // redefined virtual functions
 
 private:
     char fileName[20];
+    RecvMulticastDataModule* m_MulticastModule;
+    
 };
 
 #endif // ADTSSERVERMEDIASUBSESSION_H
