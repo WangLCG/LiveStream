@@ -70,7 +70,7 @@ namespace MESAI
             snprintf(RTSP_Address, 1024, "%s", "ch0");
 
             bool ReusedFirstSource = True;
-            
+            /* 此处可以添加多个ServerMediaSession实例，每个实例代表一个独立的rtsp通道 */
             ServerMediaSession* sms = ServerMediaSession::createNew(*env, RTSP_Address, RTSP_Address, descriptionString);
             sms->addSubsession(MESAI::LiveServerMediaSubsession::createNew(*env, NULL,m_MulticastModule, ReusedFirstSource));
             
