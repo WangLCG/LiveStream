@@ -125,7 +125,7 @@ void AdtsAACAudioStreamSource::mySleep(void *p)
 void AdtsAACAudioStreamSource::doGetNextFrame()
 {
 
-    char headers[7];
+    //char headers[7];
     u_int16_t frame_length =0;
     unsigned numBytesToRead = 0 ;
 
@@ -141,7 +141,25 @@ void AdtsAACAudioStreamSource::doGetNextFrame()
             //printf("File[%s]---[%d]: audio.buf_size[%u] fMaxSize[%u]\n", __FUNCTION__, __LINE__, 
             //    audio.buf_size, fMaxSize);
             
-            numBytesToRead = audio.buf_size;
+			/* ADTS header 不发送 */
+            //numBytesToRead = audio.buf_size;
+			char* Header = audio.buf.get();
+            Boolean protection_absent = Header[1]&0x01;
+            unsigned  int HeaderSize = 7;
+            if(protection_absent)
+            {
+                HeaderSize = 7;
+            }
+            else
+            {
+                HeaderSize = 9;
+            }
+            
+            /* 获取AAC音频数据大小 */
+            u_int16_t frame_length
+                = ((Header[3]&0x03)<<11) | (Header[4]<<3) | ((Header[5]&0xE0)>>5);
+            
+            numBytesToRead = frame_length > HeaderSize ? (frame_length - HeaderSize) : 0;
 #if 0
             // Set the 'presentation time':
             if (fPresentationTime.tv_sec == 0 && fPresentationTime.tv_usec == 0)
@@ -175,7 +193,7 @@ void AdtsAACAudioStreamSource::doGetNextFrame()
             fFrameSize = numBytesRead;
             fNumTruncatedBytes += numBytesToRead - numBytesRead;
             
-            memcpy(fTo, audio.buf , fFrameSize);
+            memcpy(fTo, audio.buf+HeaderSize , fFrameSize);
         }
         else
         {
