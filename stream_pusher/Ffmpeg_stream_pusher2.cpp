@@ -254,10 +254,11 @@ AVStream* FillPKGStreamPusher::add_stream(AVFormatContext *oc, AVCodec **codec,
                 c->height   = m_videoHeight;
                 c->time_base.num  = 1;
                 c->time_base.den = 90000;
-                c->gop_size = 1; // keyframe interval
+                c->gop_size = 30; // keyframe interval
                 //c->frame_number = 1;
                 c->pix_fmt = AV_PIX_FMT_YUV420P;
                 //c->has_b_frames = 0;
+                c->codec_tag      = 0;
                 
                 if (c->codec_id == AV_CODEC_ID_MPEG2VIDEO)
                 {
@@ -300,6 +301,7 @@ AVStream* FillPKGStreamPusher::add_stream(AVFormatContext *oc, AVCodec **codec,
 
 bool FillPKGStreamPusher::judgeIframe(unsigned char* dataBuf, int buf_size, int& spssize)
 {
+    /* 不适用于起始码3个字节的只适用00 00 00 01起始码 */
     bool bret = false;
 
     unsigned char* tempbuf = dataBuf;
@@ -355,12 +357,14 @@ bool FillPKGStreamPusher::judgeIframe(unsigned char* dataBuf, int buf_size, int&
         int nal_unit_type = tempbuf[4]& 0x1f;
         if( nal_unit_type == 7)
         {
+            /* sps */
             while(1)
             {
                 if(tempbuf[tmpsize+spssize]==0&&tempbuf[tmpsize+1+spssize]==0&&tempbuf[tmpsize+2+spssize]==0&&tempbuf[tmpsize+3+spssize]==1)
                 {
                     spssize += tmpsize;
-                    int nal_unit_type1 = tempbuf[tmpsize+spssize]& 0x1f;
+                    int nal_unit_type1 = tempbuf[spssize+tmpsize] & 0x1f;
+                    //printf("------------- spssize[%d] nal_unit_type1 = %d nal_unit_type = %d \n", spssize, nal_unit_type1, nal_unit_type);
                     if(nal_unit_type1==8)
                     {
                         while(1)
@@ -371,6 +375,7 @@ bool FillPKGStreamPusher::judgeIframe(unsigned char* dataBuf, int buf_size, int&
                             }
                             spssize++;
                         }
+                        spssize += tmpsize; /* 加上pps的起始码 */
                     }
                     break;
                 }
@@ -436,6 +441,7 @@ bool FillPKGStreamPusher::FillAvPacket(int streamIndex, MultiFrameInfo& frame,AV
         }
         else
         {
+            printf("spssize [%d] \n", spssize);            
             printf("Begin to create output  \n");
             if(CreateOutput(m_o_fmt_ctx, frame.buf, spssize) < 0)
             {

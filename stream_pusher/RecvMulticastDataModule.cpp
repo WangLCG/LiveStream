@@ -103,11 +103,11 @@ void * RecvMulticastDataModule::audioLoop(void *ptr)
     if( !ptr ) 
         return NULL;
     
-    pthread_detach(pthread_self());
+    //pthread_detach(pthread_self());
     RecvMulticastDataModule *p=(RecvMulticastDataModule *)ptr;
     p->audioLoopFunc();
     cout << "===== RecvMulticastDataModule::audioLoop =====" << endl;
-    pthread_exit(NULL);
+    //pthread_exit(NULL);
     
     return NULL;
 }
@@ -153,13 +153,13 @@ void * RecvMulticastDataModule::videoLoop(void *ptr)
     if(!ptr ) 
         return NULL;
     
-    pthread_detach(pthread_self());
+    //pthread_detach(pthread_self());
     RecvMulticastDataModule *p=(RecvMulticastDataModule *)ptr;
     
     p->videoLoopFunc();
     cout << "===== RecvMulticastDataModule::videoLoopFunc =====" << endl;
 
-    pthread_exit(NULL);
+    //pthread_exit(NULL);
     
     return NULL;
 }
@@ -591,64 +591,10 @@ void RecvMulticastDataModule::PushVideoFrame(MultiFrameInfo& video)
         m_TotalVideoTimeStamp = 0;
     }
 #endif
-
-    //printf("---------- IN PushVideoFrame function m_GotFirstIFrame[%d]-------------------- \n", m_GotFirstIFrame);
-    if(!m_GotFirstIFrame)
-    {
-        int frame_type = H264_GetFrameType(video.buf, video.buf_size, 4);
-        if (frame_type == H264_FRAME_I || frame_type == H264_FRAME_SI)
-        { 
-            // 判断该H264帧是否为I帧
-           IsH264Frame = true;
-           m_GotFirstIFrame = true;
-        }
-        else
-        {
-            frame_type = H264_GetFrameType(video.buf, video.buf_size, 3);
-            if (frame_type == H264_FRAME_I || frame_type == H264_FRAME_SI)
-            {
-                // 判断该H264帧是否为I帧
-                IsH264Frame = true;
-            }
-            else if (frame_type != H264_FRAME_UNKNOWN)
-            {
-                /* p frame*/
-               IsH264Frame = true;
-                m_GotFirstIFrame = true;
-            }
-        }
-
-        if(!m_GotFirstIFrame)
-        {
-            printf("---------------- This frame is not I frame  --------------\n");
-            delete[] video.buf;
-            video.buf = NULL;
-            return ;
-        }
-
-        if(IsH264Frame)
-        {
-            m_i_begin_timeStamp = video.timeStamp;
-        }
-    }
-
-    //printf("---------- IN PushVideoFrame function IsH264Frame[%d]-------------------- \n", IsH264Frame);
-    
     pthread_mutex_lock(&m_VideoLock);
     m_VideoMutilQueue.push(video);
     pthread_mutex_unlock(&m_VideoLock);
 
-#if 0
-    try
-    {
-        //m_onVideoFrame();
-        //cout << "##### Get next video frame #####" << endl;
-    }
-    catch(std::bad_function_call& e)
-    {
-        cout << "error: null m_onVideoFrame function" << endl;
-    }
-#endif
 }
 
 void RecvMulticastDataModule::analyseTime(VDataMsgHeader* header, unsigned long long& timeStamp)

@@ -107,7 +107,7 @@ public:
     /// \brief           判断h264/h265视频流的类型是否为I帧
     /// \details         判断h264/h265视频流的类型是否为I帧
     //// \param[in]          dataBuf   视频流数据
-    //// \param[in/out]      spssize   sps大小
+    //// \param[in/out]      spssize   sps及pps大小
     /// \return  TRUE -- 是I帧，false -- 不是I帧
     //////////////////////////////////////////////////////////////////////////
     bool judgeIframe(unsigned char* dataBuf, int buf_size, int& spssize);

@@ -106,6 +106,9 @@ int main()
     //    DEBUG_E("Open %s failed. Error[%s]", TestH264, strerror(errno));
     //    goto end;
    // }
+    //const char* path = "rtsp://192.168.1.12:554/test";
+    const char* path = "rtmp://localhost:1936/live/test";
+    
 #if(ENABLE_FILL_PACK_INSTANCE == 0)
     // 实例化混流器
     muxer = new MP4Muxer(MultiCastModule);
@@ -114,7 +117,7 @@ int main()
     
     muxer->SetVideoCB(videocb);
     muxer->SetAudioCB(audiocb);
-    if (!muxer->Start("rtsp://192.168.1.12:554/test"))
+    if (!muxer->Start(path))
     {
         delete muxer;
         DEBUG_E("Muxer start fail.");
@@ -209,7 +212,8 @@ int main()
     muxer->Stop();
     delete muxer;
 #else
-    const char* path = "rtsp://192.168.1.12:554/test";
+    //const char* path = "rtsp://192.168.1.12:554/test";
+    //const char* path = "rtmp://192.168.1.252/live/test";
     PusherHandle = new FillPKGStreamPusher(25, path, 0, 1920, 1080, MultiCastModule);
 
     while (1)
@@ -270,7 +274,7 @@ int main()
            bwrite = PusherHandle->FillAvPacket(stream_index, audio, pkt);
         }
 
-        printf("======= compare_tag[%lld] bwrite[%d] stream_index[%d]=====\n", compare_tag, bwrite, stream_index);
+        //printf("======= compare_tag[%lld] bwrite[%d] stream_index[%d]=====\n", compare_tag, bwrite, stream_index);
         if(bwrite)
         {
             PusherHandle->writeFileAvPacket(stream_index, pkt);
@@ -301,7 +305,7 @@ int main()
     }
 
 end:
-    _DEBUG_I("Muxer finished.\n");
-    getchar();
+    _DEBUG_I("streaming finished.\n");
+    //getchar();
 }
 
