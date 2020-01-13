@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/rtmp_client.dir/simplest_librtmp_receive.cpp.o  -o rtmp_client  -L/home/wangchao/rtmpclient/3rdparty/librtmp/lib -rdynamic -lrtmp -lssl -lcrypto -lm -lpthread -Wl,-rpath,/home/wangchao/rtmpclient/3rdparty/librtmp/lib 
