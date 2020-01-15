@@ -1,0 +1,14 @@
+prefix=/home/wangchao/ffmpeg-4.1/wangc_ffmpeg4_1_out
+exec_prefix=${prefix}
+libdir=/home/wangchao/ffmpeg-4.1/wangc_ffmpeg4_1_out/lib
+includedir=/home/wangchao/ffmpeg-4.1/wangc_ffmpeg4_1_out/include
+
+Name: libswresample
+Description: FFmpeg audio resampling library
+Version: 3.3.100
+Requires: 
+Requires.private: libavutil >= 56.22.100
+Conflicts:
+Libs: -L${libdir}  -lswresample 
+Libs.private: -lm
+Cflags: -I${includedir}
