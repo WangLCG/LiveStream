@@ -1,6 +1,6 @@
 环境&使用：
     centos6.9
-    需要将ffmpeg的库及头文件放入到3rdpart中，可直接从LiveStream/stream_pusher/ffmpeg拷贝一份
+    需要[将ffmpeg的库]及头文件放入到3rdpart中，可直接从LiveStream/stream_pusher/ffmpeg拷贝一份
     cd build; cmake ../; make; ./filter_demo
 
 功能：
