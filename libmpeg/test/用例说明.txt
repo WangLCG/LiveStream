@@ -1,0 +1,9 @@
+1、环境：
+   ubuntu14, ffmpeg库， aac，h264/H265格式的文件；
+
+2、使用
+   cd test/build; cmake ../ ; make;
+
+3、功能
+   1、ffmpeg读取aac, h264格式视频，然后封装为ps文件；
+   2、读取ps文件，然后分别保存为aac,h264/hevc文件；
