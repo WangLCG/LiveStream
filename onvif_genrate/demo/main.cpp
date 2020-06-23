@@ -12,8 +12,21 @@
 #include <stdio.h>
 #include <string.h>
 #include <algorithm>
+#include <vector>
+#include <iostream>
+#include <sstream>
 
 using namespace std;
+
+static void split(string src, char delim, vector<string>& array)
+{
+    stringstream tmp_strream(src);
+    string tmp;
+    while(getline(tmp_strream, tmp, delim))
+    {
+        array.push_back(tmp);
+    }
+}
 
 static struct soap* ONVIF_Initsoap(struct SOAP_ENV__Header *header, const char *was_To, const char *was_Action, int timeout)
 {
@@ -103,8 +116,81 @@ static int ONVIF_SetAuthInfo(struct soap *soap, const char *username, const char
     return result;
 }
 
+void test_discover()
+{
+    /* 
+       添加ens33网卡的路由信息，否则probe时会返回soap_send___wsdd__Probe -1 
+       参考：https://blog.csdn.net/elvia7/article/details/69524972
+    */
+    system("route add -host 239.255.255.250 dev ens33");
+
+    struct __wsdd__ProbeMatches resp;        // 消息应答
+    struct wsdd__ScopesType scopes;          // 描述查找哪类的Web服务
+    struct wsdd__ProbeType req;                  // 请求消息
+    char soap_endpoint[64] = {0};
+
+    struct SOAP_ENV__Header header;
+    char* To = "urn:schemas-xmlsoap-org:ws:2005:04:discovery";
+    char* action = "http://schemas.xmlsoap.org/ws/2005/04/discovery/Probe";
+    struct soap* pSoap = ONVIF_Initsoap(&header, To, action, 5);
+    pSoap->recv_timeout = 2;
+
+    //soap_default_wsdd__ScopesType(pSoap&)
+    soap_default_wsdd__ScopesType(pSoap, &scopes);
+    scopes.__item = NULL;//"onvif://www.onvif.org";
+    soap_default_wsdd__ProbeType(pSoap, &req);
+    req.Scopes = &scopes;
+    char types[] = "dn:NetworkVideoTransmitter";
+    req.Types = types;
+
+    string localIp = "172.16.41.221";  /* 本机器IP */
+    string mulip = "239.255.255.250";  /* 也可以替换成一个IPC的IP，这样子就会只探测一个设备 */
+    sprintf(soap_endpoint, "soap.udp://%s:3702/", mulip.c_str());
+
+    cout << " soap_endpoint " << soap_endpoint;
+    struct in_addr if_req;
+    if_req.s_addr = inet_addr(localIp.c_str());  // eternet
+    pSoap->ipv4_multicast_if = (char*)soap_malloc(pSoap, sizeof(in_addr));
+    memset(pSoap->ipv4_multicast_if, 0, sizeof(in_addr));
+    memcpy(pSoap->ipv4_multicast_if, (char*)&if_req, sizeof(if_req));
+
+    int num = 0;
+    int ret = soap_send___wsdd__Probe(pSoap, soap_endpoint, NULL, &req);
+    while(SOAP_OK == ret)
+    {
+        ret= soap_recv___wsdd__ProbeMatches(pSoap, &resp);
+        if(ret == SOAP_OK && !pSoap->error)
+        {
+            string ipaddress,uuid;int port=0;
+            string xAddress=string(resp.wsdd__ProbeMatches->ProbeMatch->XAddrs);
+            cout << "xAddress is "<< xAddress << endl;
+
+            std::vector<std::string> vecSegTag;
+            split(xAddress,'/', vecSegTag);
+            for(int i=0;i<vecSegTag.size();i++)
+            {
+                cout<<" spilt value is "<<vecSegTag[i] << endl;
+            }
+        }
+        else
+        {
+            printf("soap_recv___wsdd__ProbeMatches soap error: %d, %s, %s\n", pSoap->error, *soap_faultcode(pSoap), *soap_faultstring(pSoap));
+        }
+        
+    }
+    
+    if(ret != SOAP_OK)
+    {
+        cout << "soap_send___wsdd__Probe faile " << pSoap->error << endl;
+        printf("soap_send___wsdd__Probe soap error: %d, %s, %s\n", pSoap->error, *soap_faultcode(pSoap), *soap_faultstring(pSoap));
+    }
+    
+}
+
 int main(int argc,char *argv[])
 {
+    test_discover();
+
     int i = 0;
     int ret = 0;
     char secvre_addr[] = "http://172.16.41.190/onvif/device_service"; //设备搜索获取得到的服务地址
