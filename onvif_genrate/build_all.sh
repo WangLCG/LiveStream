@@ -3,7 +3,7 @@ ROOT_PATH=`pwd`
 INSTALL_PATH=$ROOT_PATH/install
 GSOAP_PATH=$ROOT_PATH/gsoap
 
-tar -zxvf gsoap.tar.gz
+#tar -zxvf gsoap.tar.gz
 
 rm $INSTALL_PATH -rf
 
@@ -14,7 +14,7 @@ $GSOAP_PATH/wsdl2h -o onvif.h -c -s -t ../typemap.dat  https://www.onvif.org/ver
        https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl https://www.onvif.org/onvif/ver10/event/wsdl/event.wsdl \
        https://www.onvif.org/ver20/media/wsdl/media.wsdl
 sed -i '/#import "wsa5.h"/i\#import "wsse.h"' onvif.h
-$GSOAP_PATH/soapcpp2 ./onvif.h -x -C -c -I ../gsoap/import -I ../gsoap
+$GSOAP_PATH/soapcpp2 ./onvif.h -x -c -L -I ../gsoap/import -I ../gsoap
 
 mv MediaBinding.nsmap namespace.h
 rm *.nsmap

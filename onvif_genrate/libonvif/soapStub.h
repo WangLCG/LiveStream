@@ -17093,6 +17093,1115 @@ typedef char *tt__RecordingJobReference;
 
 /******************************************************************************\
  *                                                                            *
+ * Server-Side Operations                                                     *
+ *                                                                            *
+\******************************************************************************/
+
+
+SOAP_FMAC5 int SOAP_FMAC6 SOAP_ENV__Fault(struct soap*, char *faultcode, char *faultstring, char *faultactor, struct SOAP_ENV__Detail *detail, struct SOAP_ENV__Code *SOAP_ENV__Code, struct SOAP_ENV__Reason *SOAP_ENV__Reason, char *SOAP_ENV__Node, char *SOAP_ENV__Role, struct SOAP_ENV__Detail *SOAP_ENV__Detail);
+
+SOAP_FMAC5 int SOAP_FMAC6 __wsdd__Hello(struct soap*, struct wsdd__HelloType *wsdd__Hello);
+
+SOAP_FMAC5 int SOAP_FMAC6 __wsdd__Bye(struct soap*, struct wsdd__ByeType *wsdd__Bye);
+
+SOAP_FMAC5 int SOAP_FMAC6 __wsdd__Probe(struct soap*, struct wsdd__ProbeType *wsdd__Probe);
+
+SOAP_FMAC5 int SOAP_FMAC6 __wsdd__ProbeMatches(struct soap*, struct wsdd__ProbeMatchesType *wsdd__ProbeMatches);
+
+SOAP_FMAC5 int SOAP_FMAC6 __wsdd__Resolve(struct soap*, struct wsdd__ResolveType *wsdd__Resolve);
+
+SOAP_FMAC5 int SOAP_FMAC6 __wsdd__ResolveMatches(struct soap*, struct wsdd__ResolveMatchesType *wsdd__ResolveMatches);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tdn__Hello(struct soap*, struct wsdd__HelloType tdn__Hello, struct wsdd__ResolveType *tdn__HelloResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tdn__Bye(struct soap*, struct wsdd__ByeType tdn__Bye, struct wsdd__ResolveType *tdn__ByeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tdn__Probe(struct soap*, struct wsdd__ProbeType tdn__Probe, struct wsdd__ProbeMatchesType *tdn__ProbeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetServices(struct soap*, struct _tds__GetServices *tds__GetServices, struct _tds__GetServicesResponse *tds__GetServicesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetServiceCapabilities(struct soap*, struct _tds__GetServiceCapabilities *tds__GetServiceCapabilities, struct _tds__GetServiceCapabilitiesResponse *tds__GetServiceCapabilitiesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetDeviceInformation(struct soap*, struct _tds__GetDeviceInformation *tds__GetDeviceInformation, struct _tds__GetDeviceInformationResponse *tds__GetDeviceInformationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetSystemDateAndTime(struct soap*, struct _tds__SetSystemDateAndTime *tds__SetSystemDateAndTime, struct _tds__SetSystemDateAndTimeResponse *tds__SetSystemDateAndTimeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetSystemDateAndTime(struct soap*, struct _tds__GetSystemDateAndTime *tds__GetSystemDateAndTime, struct _tds__GetSystemDateAndTimeResponse *tds__GetSystemDateAndTimeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetSystemFactoryDefault(struct soap*, struct _tds__SetSystemFactoryDefault *tds__SetSystemFactoryDefault, struct _tds__SetSystemFactoryDefaultResponse *tds__SetSystemFactoryDefaultResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__UpgradeSystemFirmware(struct soap*, struct _tds__UpgradeSystemFirmware *tds__UpgradeSystemFirmware, struct _tds__UpgradeSystemFirmwareResponse *tds__UpgradeSystemFirmwareResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SystemReboot(struct soap*, struct _tds__SystemReboot *tds__SystemReboot, struct _tds__SystemRebootResponse *tds__SystemRebootResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__RestoreSystem(struct soap*, struct _tds__RestoreSystem *tds__RestoreSystem, struct _tds__RestoreSystemResponse *tds__RestoreSystemResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetSystemBackup(struct soap*, struct _tds__GetSystemBackup *tds__GetSystemBackup, struct _tds__GetSystemBackupResponse *tds__GetSystemBackupResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetSystemLog(struct soap*, struct _tds__GetSystemLog *tds__GetSystemLog, struct _tds__GetSystemLogResponse *tds__GetSystemLogResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetSystemSupportInformation(struct soap*, struct _tds__GetSystemSupportInformation *tds__GetSystemSupportInformation, struct _tds__GetSystemSupportInformationResponse *tds__GetSystemSupportInformationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetScopes(struct soap*, struct _tds__GetScopes *tds__GetScopes, struct _tds__GetScopesResponse *tds__GetScopesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetScopes(struct soap*, struct _tds__SetScopes *tds__SetScopes, struct _tds__SetScopesResponse *tds__SetScopesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__AddScopes(struct soap*, struct _tds__AddScopes *tds__AddScopes, struct _tds__AddScopesResponse *tds__AddScopesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__RemoveScopes(struct soap*, struct _tds__RemoveScopes *tds__RemoveScopes, struct _tds__RemoveScopesResponse *tds__RemoveScopesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetDiscoveryMode(struct soap*, struct _tds__GetDiscoveryMode *tds__GetDiscoveryMode, struct _tds__GetDiscoveryModeResponse *tds__GetDiscoveryModeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetDiscoveryMode(struct soap*, struct _tds__SetDiscoveryMode *tds__SetDiscoveryMode, struct _tds__SetDiscoveryModeResponse *tds__SetDiscoveryModeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetRemoteDiscoveryMode(struct soap*, struct _tds__GetRemoteDiscoveryMode *tds__GetRemoteDiscoveryMode, struct _tds__GetRemoteDiscoveryModeResponse *tds__GetRemoteDiscoveryModeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetRemoteDiscoveryMode(struct soap*, struct _tds__SetRemoteDiscoveryMode *tds__SetRemoteDiscoveryMode, struct _tds__SetRemoteDiscoveryModeResponse *tds__SetRemoteDiscoveryModeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetDPAddresses(struct soap*, struct _tds__GetDPAddresses *tds__GetDPAddresses, struct _tds__GetDPAddressesResponse *tds__GetDPAddressesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetEndpointReference(struct soap*, struct _tds__GetEndpointReference *tds__GetEndpointReference, struct _tds__GetEndpointReferenceResponse *tds__GetEndpointReferenceResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetRemoteUser(struct soap*, struct _tds__GetRemoteUser *tds__GetRemoteUser, struct _tds__GetRemoteUserResponse *tds__GetRemoteUserResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetRemoteUser(struct soap*, struct _tds__SetRemoteUser *tds__SetRemoteUser, struct _tds__SetRemoteUserResponse *tds__SetRemoteUserResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetUsers(struct soap*, struct _tds__GetUsers *tds__GetUsers, struct _tds__GetUsersResponse *tds__GetUsersResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__CreateUsers(struct soap*, struct _tds__CreateUsers *tds__CreateUsers, struct _tds__CreateUsersResponse *tds__CreateUsersResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__DeleteUsers(struct soap*, struct _tds__DeleteUsers *tds__DeleteUsers, struct _tds__DeleteUsersResponse *tds__DeleteUsersResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetUser(struct soap*, struct _tds__SetUser *tds__SetUser, struct _tds__SetUserResponse *tds__SetUserResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetWsdlUrl(struct soap*, struct _tds__GetWsdlUrl *tds__GetWsdlUrl, struct _tds__GetWsdlUrlResponse *tds__GetWsdlUrlResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetCapabilities(struct soap*, struct _tds__GetCapabilities *tds__GetCapabilities, struct _tds__GetCapabilitiesResponse *tds__GetCapabilitiesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetDPAddresses(struct soap*, struct _tds__SetDPAddresses *tds__SetDPAddresses, struct _tds__SetDPAddressesResponse *tds__SetDPAddressesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetHostname(struct soap*, struct _tds__GetHostname *tds__GetHostname, struct _tds__GetHostnameResponse *tds__GetHostnameResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetHostname(struct soap*, struct _tds__SetHostname *tds__SetHostname, struct _tds__SetHostnameResponse *tds__SetHostnameResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetHostnameFromDHCP(struct soap*, struct _tds__SetHostnameFromDHCP *tds__SetHostnameFromDHCP, struct _tds__SetHostnameFromDHCPResponse *tds__SetHostnameFromDHCPResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetDNS(struct soap*, struct _tds__GetDNS *tds__GetDNS, struct _tds__GetDNSResponse *tds__GetDNSResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetDNS(struct soap*, struct _tds__SetDNS *tds__SetDNS, struct _tds__SetDNSResponse *tds__SetDNSResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetNTP(struct soap*, struct _tds__GetNTP *tds__GetNTP, struct _tds__GetNTPResponse *tds__GetNTPResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetNTP(struct soap*, struct _tds__SetNTP *tds__SetNTP, struct _tds__SetNTPResponse *tds__SetNTPResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetDynamicDNS(struct soap*, struct _tds__GetDynamicDNS *tds__GetDynamicDNS, struct _tds__GetDynamicDNSResponse *tds__GetDynamicDNSResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetDynamicDNS(struct soap*, struct _tds__SetDynamicDNS *tds__SetDynamicDNS, struct _tds__SetDynamicDNSResponse *tds__SetDynamicDNSResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetNetworkInterfaces(struct soap*, struct _tds__GetNetworkInterfaces *tds__GetNetworkInterfaces, struct _tds__GetNetworkInterfacesResponse *tds__GetNetworkInterfacesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetNetworkInterfaces(struct soap*, struct _tds__SetNetworkInterfaces *tds__SetNetworkInterfaces, struct _tds__SetNetworkInterfacesResponse *tds__SetNetworkInterfacesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetNetworkProtocols(struct soap*, struct _tds__GetNetworkProtocols *tds__GetNetworkProtocols, struct _tds__GetNetworkProtocolsResponse *tds__GetNetworkProtocolsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetNetworkProtocols(struct soap*, struct _tds__SetNetworkProtocols *tds__SetNetworkProtocols, struct _tds__SetNetworkProtocolsResponse *tds__SetNetworkProtocolsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetNetworkDefaultGateway(struct soap*, struct _tds__GetNetworkDefaultGateway *tds__GetNetworkDefaultGateway, struct _tds__GetNetworkDefaultGatewayResponse *tds__GetNetworkDefaultGatewayResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetNetworkDefaultGateway(struct soap*, struct _tds__SetNetworkDefaultGateway *tds__SetNetworkDefaultGateway, struct _tds__SetNetworkDefaultGatewayResponse *tds__SetNetworkDefaultGatewayResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetZeroConfiguration(struct soap*, struct _tds__GetZeroConfiguration *tds__GetZeroConfiguration, struct _tds__GetZeroConfigurationResponse *tds__GetZeroConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetZeroConfiguration(struct soap*, struct _tds__SetZeroConfiguration *tds__SetZeroConfiguration, struct _tds__SetZeroConfigurationResponse *tds__SetZeroConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetIPAddressFilter(struct soap*, struct _tds__GetIPAddressFilter *tds__GetIPAddressFilter, struct _tds__GetIPAddressFilterResponse *tds__GetIPAddressFilterResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetIPAddressFilter(struct soap*, struct _tds__SetIPAddressFilter *tds__SetIPAddressFilter, struct _tds__SetIPAddressFilterResponse *tds__SetIPAddressFilterResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__AddIPAddressFilter(struct soap*, struct _tds__AddIPAddressFilter *tds__AddIPAddressFilter, struct _tds__AddIPAddressFilterResponse *tds__AddIPAddressFilterResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__RemoveIPAddressFilter(struct soap*, struct _tds__RemoveIPAddressFilter *tds__RemoveIPAddressFilter, struct _tds__RemoveIPAddressFilterResponse *tds__RemoveIPAddressFilterResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetAccessPolicy(struct soap*, struct _tds__GetAccessPolicy *tds__GetAccessPolicy, struct _tds__GetAccessPolicyResponse *tds__GetAccessPolicyResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetAccessPolicy(struct soap*, struct _tds__SetAccessPolicy *tds__SetAccessPolicy, struct _tds__SetAccessPolicyResponse *tds__SetAccessPolicyResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__CreateCertificate(struct soap*, struct _tds__CreateCertificate *tds__CreateCertificate, struct _tds__CreateCertificateResponse *tds__CreateCertificateResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetCertificates(struct soap*, struct _tds__GetCertificates *tds__GetCertificates, struct _tds__GetCertificatesResponse *tds__GetCertificatesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetCertificatesStatus(struct soap*, struct _tds__GetCertificatesStatus *tds__GetCertificatesStatus, struct _tds__GetCertificatesStatusResponse *tds__GetCertificatesStatusResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetCertificatesStatus(struct soap*, struct _tds__SetCertificatesStatus *tds__SetCertificatesStatus, struct _tds__SetCertificatesStatusResponse *tds__SetCertificatesStatusResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__DeleteCertificates(struct soap*, struct _tds__DeleteCertificates *tds__DeleteCertificates, struct _tds__DeleteCertificatesResponse *tds__DeleteCertificatesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetPkcs10Request(struct soap*, struct _tds__GetPkcs10Request *tds__GetPkcs10Request, struct _tds__GetPkcs10RequestResponse *tds__GetPkcs10RequestResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__LoadCertificates(struct soap*, struct _tds__LoadCertificates *tds__LoadCertificates, struct _tds__LoadCertificatesResponse *tds__LoadCertificatesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetClientCertificateMode(struct soap*, struct _tds__GetClientCertificateMode *tds__GetClientCertificateMode, struct _tds__GetClientCertificateModeResponse *tds__GetClientCertificateModeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetClientCertificateMode(struct soap*, struct _tds__SetClientCertificateMode *tds__SetClientCertificateMode, struct _tds__SetClientCertificateModeResponse *tds__SetClientCertificateModeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetRelayOutputs(struct soap*, struct _tds__GetRelayOutputs *tds__GetRelayOutputs, struct _tds__GetRelayOutputsResponse *tds__GetRelayOutputsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetRelayOutputSettings(struct soap*, struct _tds__SetRelayOutputSettings *tds__SetRelayOutputSettings, struct _tds__SetRelayOutputSettingsResponse *tds__SetRelayOutputSettingsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetRelayOutputState(struct soap*, struct _tds__SetRelayOutputState *tds__SetRelayOutputState, struct _tds__SetRelayOutputStateResponse *tds__SetRelayOutputStateResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SendAuxiliaryCommand(struct soap*, struct _tds__SendAuxiliaryCommand *tds__SendAuxiliaryCommand, struct _tds__SendAuxiliaryCommandResponse *tds__SendAuxiliaryCommandResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetCACertificates(struct soap*, struct _tds__GetCACertificates *tds__GetCACertificates, struct _tds__GetCACertificatesResponse *tds__GetCACertificatesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__LoadCertificateWithPrivateKey(struct soap*, struct _tds__LoadCertificateWithPrivateKey *tds__LoadCertificateWithPrivateKey, struct _tds__LoadCertificateWithPrivateKeyResponse *tds__LoadCertificateWithPrivateKeyResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetCertificateInformation(struct soap*, struct _tds__GetCertificateInformation *tds__GetCertificateInformation, struct _tds__GetCertificateInformationResponse *tds__GetCertificateInformationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__LoadCACertificates(struct soap*, struct _tds__LoadCACertificates *tds__LoadCACertificates, struct _tds__LoadCACertificatesResponse *tds__LoadCACertificatesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__CreateDot1XConfiguration(struct soap*, struct _tds__CreateDot1XConfiguration *tds__CreateDot1XConfiguration, struct _tds__CreateDot1XConfigurationResponse *tds__CreateDot1XConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetDot1XConfiguration(struct soap*, struct _tds__SetDot1XConfiguration *tds__SetDot1XConfiguration, struct _tds__SetDot1XConfigurationResponse *tds__SetDot1XConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetDot1XConfiguration(struct soap*, struct _tds__GetDot1XConfiguration *tds__GetDot1XConfiguration, struct _tds__GetDot1XConfigurationResponse *tds__GetDot1XConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetDot1XConfigurations(struct soap*, struct _tds__GetDot1XConfigurations *tds__GetDot1XConfigurations, struct _tds__GetDot1XConfigurationsResponse *tds__GetDot1XConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__DeleteDot1XConfiguration(struct soap*, struct _tds__DeleteDot1XConfiguration *tds__DeleteDot1XConfiguration, struct _tds__DeleteDot1XConfigurationResponse *tds__DeleteDot1XConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetDot11Capabilities(struct soap*, struct _tds__GetDot11Capabilities *tds__GetDot11Capabilities, struct _tds__GetDot11CapabilitiesResponse *tds__GetDot11CapabilitiesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetDot11Status(struct soap*, struct _tds__GetDot11Status *tds__GetDot11Status, struct _tds__GetDot11StatusResponse *tds__GetDot11StatusResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__ScanAvailableDot11Networks(struct soap*, struct _tds__ScanAvailableDot11Networks *tds__ScanAvailableDot11Networks, struct _tds__ScanAvailableDot11NetworksResponse *tds__ScanAvailableDot11NetworksResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetSystemUris(struct soap*, struct _tds__GetSystemUris *tds__GetSystemUris, struct _tds__GetSystemUrisResponse *tds__GetSystemUrisResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__StartFirmwareUpgrade(struct soap*, struct _tds__StartFirmwareUpgrade *tds__StartFirmwareUpgrade, struct _tds__StartFirmwareUpgradeResponse *tds__StartFirmwareUpgradeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__StartSystemRestore(struct soap*, struct _tds__StartSystemRestore *tds__StartSystemRestore, struct _tds__StartSystemRestoreResponse *tds__StartSystemRestoreResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetStorageConfigurations(struct soap*, struct _tds__GetStorageConfigurations *tds__GetStorageConfigurations, struct _tds__GetStorageConfigurationsResponse *tds__GetStorageConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__CreateStorageConfiguration(struct soap*, struct _tds__CreateStorageConfiguration *tds__CreateStorageConfiguration, struct _tds__CreateStorageConfigurationResponse *tds__CreateStorageConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetStorageConfiguration(struct soap*, struct _tds__GetStorageConfiguration *tds__GetStorageConfiguration, struct _tds__GetStorageConfigurationResponse *tds__GetStorageConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetStorageConfiguration(struct soap*, struct _tds__SetStorageConfiguration *tds__SetStorageConfiguration, struct _tds__SetStorageConfigurationResponse *tds__SetStorageConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__DeleteStorageConfiguration(struct soap*, struct _tds__DeleteStorageConfiguration *tds__DeleteStorageConfiguration, struct _tds__DeleteStorageConfigurationResponse *tds__DeleteStorageConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__GetGeoLocation(struct soap*, struct _tds__GetGeoLocation *tds__GetGeoLocation, struct _tds__GetGeoLocationResponse *tds__GetGeoLocationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__SetGeoLocation(struct soap*, struct _tds__SetGeoLocation *tds__SetGeoLocation, struct _tds__SetGeoLocationResponse *tds__SetGeoLocationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tds__DeleteGeoLocation(struct soap*, struct _tds__DeleteGeoLocation *tds__DeleteGeoLocation, struct _tds__DeleteGeoLocationResponse *tds__DeleteGeoLocationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__PullMessages(struct soap*, struct _tev__PullMessages *tev__PullMessages, struct _tev__PullMessagesResponse *tev__PullMessagesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__Seek(struct soap*, struct _tev__Seek *tev__Seek, struct _tev__SeekResponse *tev__SeekResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__SetSynchronizationPoint(struct soap*, struct _tev__SetSynchronizationPoint *tev__SetSynchronizationPoint, struct _tev__SetSynchronizationPointResponse *tev__SetSynchronizationPointResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__Unsubscribe(struct soap*, struct _wsnt__Unsubscribe *wsnt__Unsubscribe, struct _wsnt__UnsubscribeResponse *wsnt__UnsubscribeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__GetServiceCapabilities(struct soap*, struct _tev__GetServiceCapabilities *tev__GetServiceCapabilities, struct _tev__GetServiceCapabilitiesResponse *tev__GetServiceCapabilitiesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__CreatePullPointSubscription(struct soap*, struct _tev__CreatePullPointSubscription *tev__CreatePullPointSubscription, struct _tev__CreatePullPointSubscriptionResponse *tev__CreatePullPointSubscriptionResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__GetEventProperties(struct soap*, struct _tev__GetEventProperties *tev__GetEventProperties, struct _tev__GetEventPropertiesResponse *tev__GetEventPropertiesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__Renew(struct soap*, struct _wsnt__Renew *wsnt__Renew, struct _wsnt__RenewResponse *wsnt__RenewResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__Unsubscribe_(struct soap*, struct _wsnt__Unsubscribe *wsnt__Unsubscribe, struct _wsnt__UnsubscribeResponse *wsnt__UnsubscribeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__Subscribe(struct soap*, struct _wsnt__Subscribe *wsnt__Subscribe, struct _wsnt__SubscribeResponse *wsnt__SubscribeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__GetCurrentMessage(struct soap*, struct _wsnt__GetCurrentMessage *wsnt__GetCurrentMessage, struct _wsnt__GetCurrentMessageResponse *wsnt__GetCurrentMessageResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__Notify(struct soap*, struct _wsnt__Notify *wsnt__Notify);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__GetMessages(struct soap*, struct _wsnt__GetMessages *wsnt__GetMessages, struct _wsnt__GetMessagesResponse *wsnt__GetMessagesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__DestroyPullPoint(struct soap*, struct _wsnt__DestroyPullPoint *wsnt__DestroyPullPoint, struct _wsnt__DestroyPullPointResponse *wsnt__DestroyPullPointResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__Notify_(struct soap*, struct _wsnt__Notify *wsnt__Notify);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__CreatePullPoint(struct soap*, struct _wsnt__CreatePullPoint *wsnt__CreatePullPoint, struct _wsnt__CreatePullPointResponse *wsnt__CreatePullPointResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__Renew_(struct soap*, struct _wsnt__Renew *wsnt__Renew, struct _wsnt__RenewResponse *wsnt__RenewResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__Unsubscribe__(struct soap*, struct _wsnt__Unsubscribe *wsnt__Unsubscribe, struct _wsnt__UnsubscribeResponse *wsnt__UnsubscribeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__PauseSubscription(struct soap*, struct _wsnt__PauseSubscription *wsnt__PauseSubscription, struct _wsnt__PauseSubscriptionResponse *wsnt__PauseSubscriptionResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tev__ResumeSubscription(struct soap*, struct _wsnt__ResumeSubscription *wsnt__ResumeSubscription, struct _wsnt__ResumeSubscriptionResponse *wsnt__ResumeSubscriptionResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GetServiceCapabilities(struct soap*, struct _tptz__GetServiceCapabilities *tptz__GetServiceCapabilities, struct _tptz__GetServiceCapabilitiesResponse *tptz__GetServiceCapabilitiesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GetConfigurations(struct soap*, struct _tptz__GetConfigurations *tptz__GetConfigurations, struct _tptz__GetConfigurationsResponse *tptz__GetConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GetPresets(struct soap*, struct _tptz__GetPresets *tptz__GetPresets, struct _tptz__GetPresetsResponse *tptz__GetPresetsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__SetPreset(struct soap*, struct _tptz__SetPreset *tptz__SetPreset, struct _tptz__SetPresetResponse *tptz__SetPresetResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__RemovePreset(struct soap*, struct _tptz__RemovePreset *tptz__RemovePreset, struct _tptz__RemovePresetResponse *tptz__RemovePresetResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GotoPreset(struct soap*, struct _tptz__GotoPreset *tptz__GotoPreset, struct _tptz__GotoPresetResponse *tptz__GotoPresetResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GetStatus(struct soap*, struct _tptz__GetStatus *tptz__GetStatus, struct _tptz__GetStatusResponse *tptz__GetStatusResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GetConfiguration(struct soap*, struct _tptz__GetConfiguration *tptz__GetConfiguration, struct _tptz__GetConfigurationResponse *tptz__GetConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GetNodes(struct soap*, struct _tptz__GetNodes *tptz__GetNodes, struct _tptz__GetNodesResponse *tptz__GetNodesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GetNode(struct soap*, struct _tptz__GetNode *tptz__GetNode, struct _tptz__GetNodeResponse *tptz__GetNodeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__SetConfiguration(struct soap*, struct _tptz__SetConfiguration *tptz__SetConfiguration, struct _tptz__SetConfigurationResponse *tptz__SetConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GetConfigurationOptions(struct soap*, struct _tptz__GetConfigurationOptions *tptz__GetConfigurationOptions, struct _tptz__GetConfigurationOptionsResponse *tptz__GetConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GotoHomePosition(struct soap*, struct _tptz__GotoHomePosition *tptz__GotoHomePosition, struct _tptz__GotoHomePositionResponse *tptz__GotoHomePositionResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__SetHomePosition(struct soap*, struct _tptz__SetHomePosition *tptz__SetHomePosition, struct _tptz__SetHomePositionResponse *tptz__SetHomePositionResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__ContinuousMove(struct soap*, struct _tptz__ContinuousMove *tptz__ContinuousMove, struct _tptz__ContinuousMoveResponse *tptz__ContinuousMoveResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__RelativeMove(struct soap*, struct _tptz__RelativeMove *tptz__RelativeMove, struct _tptz__RelativeMoveResponse *tptz__RelativeMoveResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__SendAuxiliaryCommand(struct soap*, struct _tptz__SendAuxiliaryCommand *tptz__SendAuxiliaryCommand, struct _tptz__SendAuxiliaryCommandResponse *tptz__SendAuxiliaryCommandResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__AbsoluteMove(struct soap*, struct _tptz__AbsoluteMove *tptz__AbsoluteMove, struct _tptz__AbsoluteMoveResponse *tptz__AbsoluteMoveResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GeoMove(struct soap*, struct _tptz__GeoMove *tptz__GeoMove, struct _tptz__GeoMoveResponse *tptz__GeoMoveResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__Stop(struct soap*, struct _tptz__Stop *tptz__Stop, struct _tptz__StopResponse *tptz__StopResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GetPresetTours(struct soap*, struct _tptz__GetPresetTours *tptz__GetPresetTours, struct _tptz__GetPresetToursResponse *tptz__GetPresetToursResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GetPresetTour(struct soap*, struct _tptz__GetPresetTour *tptz__GetPresetTour, struct _tptz__GetPresetTourResponse *tptz__GetPresetTourResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GetPresetTourOptions(struct soap*, struct _tptz__GetPresetTourOptions *tptz__GetPresetTourOptions, struct _tptz__GetPresetTourOptionsResponse *tptz__GetPresetTourOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__CreatePresetTour(struct soap*, struct _tptz__CreatePresetTour *tptz__CreatePresetTour, struct _tptz__CreatePresetTourResponse *tptz__CreatePresetTourResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__ModifyPresetTour(struct soap*, struct _tptz__ModifyPresetTour *tptz__ModifyPresetTour, struct _tptz__ModifyPresetTourResponse *tptz__ModifyPresetTourResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__OperatePresetTour(struct soap*, struct _tptz__OperatePresetTour *tptz__OperatePresetTour, struct _tptz__OperatePresetTourResponse *tptz__OperatePresetTourResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__RemovePresetTour(struct soap*, struct _tptz__RemovePresetTour *tptz__RemovePresetTour, struct _tptz__RemovePresetTourResponse *tptz__RemovePresetTourResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tptz__GetCompatibleConfigurations(struct soap*, struct _tptz__GetCompatibleConfigurations *tptz__GetCompatibleConfigurations, struct _tptz__GetCompatibleConfigurationsResponse *tptz__GetCompatibleConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetServiceCapabilities(struct soap*, struct _tr2__GetServiceCapabilities *tr2__GetServiceCapabilities, struct _tr2__GetServiceCapabilitiesResponse *tr2__GetServiceCapabilitiesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__CreateProfile(struct soap*, struct _tr2__CreateProfile *tr2__CreateProfile, struct _tr2__CreateProfileResponse *tr2__CreateProfileResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetProfiles(struct soap*, struct _tr2__GetProfiles *tr2__GetProfiles, struct _tr2__GetProfilesResponse *tr2__GetProfilesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__AddConfiguration(struct soap*, struct _tr2__AddConfiguration *tr2__AddConfiguration, struct _tr2__AddConfigurationResponse *tr2__AddConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__RemoveConfiguration(struct soap*, struct _tr2__RemoveConfiguration *tr2__RemoveConfiguration, struct _tr2__RemoveConfigurationResponse *tr2__RemoveConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__DeleteProfile(struct soap*, struct _tr2__DeleteProfile *tr2__DeleteProfile, struct _tr2__DeleteProfileResponse *tr2__DeleteProfileResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetVideoSourceConfigurations(struct soap*, struct tr2__GetConfiguration *tr2__GetVideoSourceConfigurations, struct _tr2__GetVideoSourceConfigurationsResponse *tr2__GetVideoSourceConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetVideoEncoderConfigurations(struct soap*, struct tr2__GetConfiguration *tr2__GetVideoEncoderConfigurations, struct _tr2__GetVideoEncoderConfigurationsResponse *tr2__GetVideoEncoderConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetAudioSourceConfigurations(struct soap*, struct tr2__GetConfiguration *tr2__GetAudioSourceConfigurations, struct _tr2__GetAudioSourceConfigurationsResponse *tr2__GetAudioSourceConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetAudioEncoderConfigurations(struct soap*, struct tr2__GetConfiguration *tr2__GetAudioEncoderConfigurations, struct _tr2__GetAudioEncoderConfigurationsResponse *tr2__GetAudioEncoderConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetAnalyticsConfigurations(struct soap*, struct tr2__GetConfiguration *tr2__GetAnalyticsConfigurations, struct _tr2__GetAnalyticsConfigurationsResponse *tr2__GetAnalyticsConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetMetadataConfigurations(struct soap*, struct tr2__GetConfiguration *tr2__GetMetadataConfigurations, struct _tr2__GetMetadataConfigurationsResponse *tr2__GetMetadataConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetAudioOutputConfigurations(struct soap*, struct tr2__GetConfiguration *tr2__GetAudioOutputConfigurations, struct _tr2__GetAudioOutputConfigurationsResponse *tr2__GetAudioOutputConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetAudioDecoderConfigurations(struct soap*, struct tr2__GetConfiguration *tr2__GetAudioDecoderConfigurations, struct _tr2__GetAudioDecoderConfigurationsResponse *tr2__GetAudioDecoderConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__SetVideoSourceConfiguration(struct soap*, struct _tr2__SetVideoSourceConfiguration *tr2__SetVideoSourceConfiguration, struct tr2__SetConfigurationResponse *tr2__SetVideoSourceConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__SetVideoEncoderConfiguration(struct soap*, struct _tr2__SetVideoEncoderConfiguration *tr2__SetVideoEncoderConfiguration, struct tr2__SetConfigurationResponse *tr2__SetVideoEncoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__SetAudioSourceConfiguration(struct soap*, struct _tr2__SetAudioSourceConfiguration *tr2__SetAudioSourceConfiguration, struct tr2__SetConfigurationResponse *tr2__SetAudioSourceConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__SetAudioEncoderConfiguration(struct soap*, struct _tr2__SetAudioEncoderConfiguration *tr2__SetAudioEncoderConfiguration, struct tr2__SetConfigurationResponse *tr2__SetAudioEncoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__SetMetadataConfiguration(struct soap*, struct _tr2__SetMetadataConfiguration *tr2__SetMetadataConfiguration, struct tr2__SetConfigurationResponse *tr2__SetMetadataConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__SetAudioOutputConfiguration(struct soap*, struct _tr2__SetAudioOutputConfiguration *tr2__SetAudioOutputConfiguration, struct tr2__SetConfigurationResponse *tr2__SetAudioOutputConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__SetAudioDecoderConfiguration(struct soap*, struct _tr2__SetAudioDecoderConfiguration *tr2__SetAudioDecoderConfiguration, struct tr2__SetConfigurationResponse *tr2__SetAudioDecoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetVideoSourceConfigurationOptions(struct soap*, struct tr2__GetConfiguration *tr2__GetVideoSourceConfigurationOptions, struct _tr2__GetVideoSourceConfigurationOptionsResponse *tr2__GetVideoSourceConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetVideoEncoderConfigurationOptions(struct soap*, struct tr2__GetConfiguration *tr2__GetVideoEncoderConfigurationOptions, struct _tr2__GetVideoEncoderConfigurationOptionsResponse *tr2__GetVideoEncoderConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetAudioSourceConfigurationOptions(struct soap*, struct tr2__GetConfiguration *tr2__GetAudioSourceConfigurationOptions, struct _tr2__GetAudioSourceConfigurationOptionsResponse *tr2__GetAudioSourceConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetAudioEncoderConfigurationOptions(struct soap*, struct tr2__GetConfiguration *tr2__GetAudioEncoderConfigurationOptions, struct _tr2__GetAudioEncoderConfigurationOptionsResponse *tr2__GetAudioEncoderConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetMetadataConfigurationOptions(struct soap*, struct tr2__GetConfiguration *tr2__GetMetadataConfigurationOptions, struct _tr2__GetMetadataConfigurationOptionsResponse *tr2__GetMetadataConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetAudioOutputConfigurationOptions(struct soap*, struct tr2__GetConfiguration *tr2__GetAudioOutputConfigurationOptions, struct _tr2__GetAudioOutputConfigurationOptionsResponse *tr2__GetAudioOutputConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetAudioDecoderConfigurationOptions(struct soap*, struct tr2__GetConfiguration *tr2__GetAudioDecoderConfigurationOptions, struct _tr2__GetAudioDecoderConfigurationOptionsResponse *tr2__GetAudioDecoderConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetVideoEncoderInstances(struct soap*, struct _tr2__GetVideoEncoderInstances *tr2__GetVideoEncoderInstances, struct _tr2__GetVideoEncoderInstancesResponse *tr2__GetVideoEncoderInstancesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetStreamUri(struct soap*, struct _tr2__GetStreamUri *tr2__GetStreamUri, struct _tr2__GetStreamUriResponse *tr2__GetStreamUriResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__StartMulticastStreaming(struct soap*, struct tr2__StartStopMulticastStreaming *tr2__StartMulticastStreaming, struct tr2__SetConfigurationResponse *tr2__StartMulticastStreamingResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__StopMulticastStreaming(struct soap*, struct tr2__StartStopMulticastStreaming *tr2__StopMulticastStreaming, struct tr2__SetConfigurationResponse *tr2__StopMulticastStreamingResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__SetSynchronizationPoint(struct soap*, struct _tr2__SetSynchronizationPoint *tr2__SetSynchronizationPoint, struct _tr2__SetSynchronizationPointResponse *tr2__SetSynchronizationPointResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetSnapshotUri(struct soap*, struct _tr2__GetSnapshotUri *tr2__GetSnapshotUri, struct _tr2__GetSnapshotUriResponse *tr2__GetSnapshotUriResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetVideoSourceModes(struct soap*, struct _tr2__GetVideoSourceModes *tr2__GetVideoSourceModes, struct _tr2__GetVideoSourceModesResponse *tr2__GetVideoSourceModesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__SetVideoSourceMode(struct soap*, struct _tr2__SetVideoSourceMode *tr2__SetVideoSourceMode, struct _tr2__SetVideoSourceModeResponse *tr2__SetVideoSourceModeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetOSDs(struct soap*, struct _tr2__GetOSDs *tr2__GetOSDs, struct _tr2__GetOSDsResponse *tr2__GetOSDsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetOSDOptions(struct soap*, struct _tr2__GetOSDOptions *tr2__GetOSDOptions, struct _tr2__GetOSDOptionsResponse *tr2__GetOSDOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__SetOSD(struct soap*, struct _tr2__SetOSD *tr2__SetOSD, struct tr2__SetConfigurationResponse *tr2__SetOSDResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__CreateOSD(struct soap*, struct _tr2__CreateOSD *tr2__CreateOSD, struct _tr2__CreateOSDResponse *tr2__CreateOSDResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__DeleteOSD(struct soap*, struct _tr2__DeleteOSD *tr2__DeleteOSD, struct tr2__SetConfigurationResponse *tr2__DeleteOSDResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetMasks(struct soap*, struct _tr2__GetMasks *tr2__GetMasks, struct _tr2__GetMasksResponse *tr2__GetMasksResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__GetMaskOptions(struct soap*, struct _tr2__GetMaskOptions *tr2__GetMaskOptions, struct _tr2__GetMaskOptionsResponse *tr2__GetMaskOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__SetMask(struct soap*, struct _tr2__SetMask *tr2__SetMask, struct tr2__SetConfigurationResponse *tr2__SetMaskResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__CreateMask(struct soap*, struct _tr2__CreateMask *tr2__CreateMask, struct _tr2__CreateMaskResponse *tr2__CreateMaskResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __tr2__DeleteMask(struct soap*, struct _tr2__DeleteMask *tr2__DeleteMask, struct tr2__SetConfigurationResponse *tr2__DeleteMaskResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetServiceCapabilities(struct soap*, struct _trt__GetServiceCapabilities *trt__GetServiceCapabilities, struct _trt__GetServiceCapabilitiesResponse *trt__GetServiceCapabilitiesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetVideoSources(struct soap*, struct _trt__GetVideoSources *trt__GetVideoSources, struct _trt__GetVideoSourcesResponse *trt__GetVideoSourcesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioSources(struct soap*, struct _trt__GetAudioSources *trt__GetAudioSources, struct _trt__GetAudioSourcesResponse *trt__GetAudioSourcesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioOutputs(struct soap*, struct _trt__GetAudioOutputs *trt__GetAudioOutputs, struct _trt__GetAudioOutputsResponse *trt__GetAudioOutputsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__CreateProfile(struct soap*, struct _trt__CreateProfile *trt__CreateProfile, struct _trt__CreateProfileResponse *trt__CreateProfileResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetProfile(struct soap*, struct _trt__GetProfile *trt__GetProfile, struct _trt__GetProfileResponse *trt__GetProfileResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetProfiles(struct soap*, struct _trt__GetProfiles *trt__GetProfiles, struct _trt__GetProfilesResponse *trt__GetProfilesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__AddVideoEncoderConfiguration(struct soap*, struct _trt__AddVideoEncoderConfiguration *trt__AddVideoEncoderConfiguration, struct _trt__AddVideoEncoderConfigurationResponse *trt__AddVideoEncoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__AddVideoSourceConfiguration(struct soap*, struct _trt__AddVideoSourceConfiguration *trt__AddVideoSourceConfiguration, struct _trt__AddVideoSourceConfigurationResponse *trt__AddVideoSourceConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__AddAudioEncoderConfiguration(struct soap*, struct _trt__AddAudioEncoderConfiguration *trt__AddAudioEncoderConfiguration, struct _trt__AddAudioEncoderConfigurationResponse *trt__AddAudioEncoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__AddAudioSourceConfiguration(struct soap*, struct _trt__AddAudioSourceConfiguration *trt__AddAudioSourceConfiguration, struct _trt__AddAudioSourceConfigurationResponse *trt__AddAudioSourceConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__AddPTZConfiguration(struct soap*, struct _trt__AddPTZConfiguration *trt__AddPTZConfiguration, struct _trt__AddPTZConfigurationResponse *trt__AddPTZConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__AddVideoAnalyticsConfiguration(struct soap*, struct _trt__AddVideoAnalyticsConfiguration *trt__AddVideoAnalyticsConfiguration, struct _trt__AddVideoAnalyticsConfigurationResponse *trt__AddVideoAnalyticsConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__AddMetadataConfiguration(struct soap*, struct _trt__AddMetadataConfiguration *trt__AddMetadataConfiguration, struct _trt__AddMetadataConfigurationResponse *trt__AddMetadataConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__AddAudioOutputConfiguration(struct soap*, struct _trt__AddAudioOutputConfiguration *trt__AddAudioOutputConfiguration, struct _trt__AddAudioOutputConfigurationResponse *trt__AddAudioOutputConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__AddAudioDecoderConfiguration(struct soap*, struct _trt__AddAudioDecoderConfiguration *trt__AddAudioDecoderConfiguration, struct _trt__AddAudioDecoderConfigurationResponse *trt__AddAudioDecoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__RemoveVideoEncoderConfiguration(struct soap*, struct _trt__RemoveVideoEncoderConfiguration *trt__RemoveVideoEncoderConfiguration, struct _trt__RemoveVideoEncoderConfigurationResponse *trt__RemoveVideoEncoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__RemoveVideoSourceConfiguration(struct soap*, struct _trt__RemoveVideoSourceConfiguration *trt__RemoveVideoSourceConfiguration, struct _trt__RemoveVideoSourceConfigurationResponse *trt__RemoveVideoSourceConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__RemoveAudioEncoderConfiguration(struct soap*, struct _trt__RemoveAudioEncoderConfiguration *trt__RemoveAudioEncoderConfiguration, struct _trt__RemoveAudioEncoderConfigurationResponse *trt__RemoveAudioEncoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__RemoveAudioSourceConfiguration(struct soap*, struct _trt__RemoveAudioSourceConfiguration *trt__RemoveAudioSourceConfiguration, struct _trt__RemoveAudioSourceConfigurationResponse *trt__RemoveAudioSourceConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__RemovePTZConfiguration(struct soap*, struct _trt__RemovePTZConfiguration *trt__RemovePTZConfiguration, struct _trt__RemovePTZConfigurationResponse *trt__RemovePTZConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__RemoveVideoAnalyticsConfiguration(struct soap*, struct _trt__RemoveVideoAnalyticsConfiguration *trt__RemoveVideoAnalyticsConfiguration, struct _trt__RemoveVideoAnalyticsConfigurationResponse *trt__RemoveVideoAnalyticsConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__RemoveMetadataConfiguration(struct soap*, struct _trt__RemoveMetadataConfiguration *trt__RemoveMetadataConfiguration, struct _trt__RemoveMetadataConfigurationResponse *trt__RemoveMetadataConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__RemoveAudioOutputConfiguration(struct soap*, struct _trt__RemoveAudioOutputConfiguration *trt__RemoveAudioOutputConfiguration, struct _trt__RemoveAudioOutputConfigurationResponse *trt__RemoveAudioOutputConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__RemoveAudioDecoderConfiguration(struct soap*, struct _trt__RemoveAudioDecoderConfiguration *trt__RemoveAudioDecoderConfiguration, struct _trt__RemoveAudioDecoderConfigurationResponse *trt__RemoveAudioDecoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__DeleteProfile(struct soap*, struct _trt__DeleteProfile *trt__DeleteProfile, struct _trt__DeleteProfileResponse *trt__DeleteProfileResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetVideoSourceConfigurations(struct soap*, struct _trt__GetVideoSourceConfigurations *trt__GetVideoSourceConfigurations, struct _trt__GetVideoSourceConfigurationsResponse *trt__GetVideoSourceConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetVideoEncoderConfigurations(struct soap*, struct _trt__GetVideoEncoderConfigurations *trt__GetVideoEncoderConfigurations, struct _trt__GetVideoEncoderConfigurationsResponse *trt__GetVideoEncoderConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioSourceConfigurations(struct soap*, struct _trt__GetAudioSourceConfigurations *trt__GetAudioSourceConfigurations, struct _trt__GetAudioSourceConfigurationsResponse *trt__GetAudioSourceConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioEncoderConfigurations(struct soap*, struct _trt__GetAudioEncoderConfigurations *trt__GetAudioEncoderConfigurations, struct _trt__GetAudioEncoderConfigurationsResponse *trt__GetAudioEncoderConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetVideoAnalyticsConfigurations(struct soap*, struct _trt__GetVideoAnalyticsConfigurations *trt__GetVideoAnalyticsConfigurations, struct _trt__GetVideoAnalyticsConfigurationsResponse *trt__GetVideoAnalyticsConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetMetadataConfigurations(struct soap*, struct _trt__GetMetadataConfigurations *trt__GetMetadataConfigurations, struct _trt__GetMetadataConfigurationsResponse *trt__GetMetadataConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioOutputConfigurations(struct soap*, struct _trt__GetAudioOutputConfigurations *trt__GetAudioOutputConfigurations, struct _trt__GetAudioOutputConfigurationsResponse *trt__GetAudioOutputConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioDecoderConfigurations(struct soap*, struct _trt__GetAudioDecoderConfigurations *trt__GetAudioDecoderConfigurations, struct _trt__GetAudioDecoderConfigurationsResponse *trt__GetAudioDecoderConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetVideoSourceConfiguration(struct soap*, struct _trt__GetVideoSourceConfiguration *trt__GetVideoSourceConfiguration, struct _trt__GetVideoSourceConfigurationResponse *trt__GetVideoSourceConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetVideoEncoderConfiguration(struct soap*, struct _trt__GetVideoEncoderConfiguration *trt__GetVideoEncoderConfiguration, struct _trt__GetVideoEncoderConfigurationResponse *trt__GetVideoEncoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioSourceConfiguration(struct soap*, struct _trt__GetAudioSourceConfiguration *trt__GetAudioSourceConfiguration, struct _trt__GetAudioSourceConfigurationResponse *trt__GetAudioSourceConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioEncoderConfiguration(struct soap*, struct _trt__GetAudioEncoderConfiguration *trt__GetAudioEncoderConfiguration, struct _trt__GetAudioEncoderConfigurationResponse *trt__GetAudioEncoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetVideoAnalyticsConfiguration(struct soap*, struct _trt__GetVideoAnalyticsConfiguration *trt__GetVideoAnalyticsConfiguration, struct _trt__GetVideoAnalyticsConfigurationResponse *trt__GetVideoAnalyticsConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetMetadataConfiguration(struct soap*, struct _trt__GetMetadataConfiguration *trt__GetMetadataConfiguration, struct _trt__GetMetadataConfigurationResponse *trt__GetMetadataConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioOutputConfiguration(struct soap*, struct _trt__GetAudioOutputConfiguration *trt__GetAudioOutputConfiguration, struct _trt__GetAudioOutputConfigurationResponse *trt__GetAudioOutputConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioDecoderConfiguration(struct soap*, struct _trt__GetAudioDecoderConfiguration *trt__GetAudioDecoderConfiguration, struct _trt__GetAudioDecoderConfigurationResponse *trt__GetAudioDecoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetCompatibleVideoEncoderConfigurations(struct soap*, struct _trt__GetCompatibleVideoEncoderConfigurations *trt__GetCompatibleVideoEncoderConfigurations, struct _trt__GetCompatibleVideoEncoderConfigurationsResponse *trt__GetCompatibleVideoEncoderConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetCompatibleVideoSourceConfigurations(struct soap*, struct _trt__GetCompatibleVideoSourceConfigurations *trt__GetCompatibleVideoSourceConfigurations, struct _trt__GetCompatibleVideoSourceConfigurationsResponse *trt__GetCompatibleVideoSourceConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetCompatibleAudioEncoderConfigurations(struct soap*, struct _trt__GetCompatibleAudioEncoderConfigurations *trt__GetCompatibleAudioEncoderConfigurations, struct _trt__GetCompatibleAudioEncoderConfigurationsResponse *trt__GetCompatibleAudioEncoderConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetCompatibleAudioSourceConfigurations(struct soap*, struct _trt__GetCompatibleAudioSourceConfigurations *trt__GetCompatibleAudioSourceConfigurations, struct _trt__GetCompatibleAudioSourceConfigurationsResponse *trt__GetCompatibleAudioSourceConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetCompatibleVideoAnalyticsConfigurations(struct soap*, struct _trt__GetCompatibleVideoAnalyticsConfigurations *trt__GetCompatibleVideoAnalyticsConfigurations, struct _trt__GetCompatibleVideoAnalyticsConfigurationsResponse *trt__GetCompatibleVideoAnalyticsConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetCompatibleMetadataConfigurations(struct soap*, struct _trt__GetCompatibleMetadataConfigurations *trt__GetCompatibleMetadataConfigurations, struct _trt__GetCompatibleMetadataConfigurationsResponse *trt__GetCompatibleMetadataConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetCompatibleAudioOutputConfigurations(struct soap*, struct _trt__GetCompatibleAudioOutputConfigurations *trt__GetCompatibleAudioOutputConfigurations, struct _trt__GetCompatibleAudioOutputConfigurationsResponse *trt__GetCompatibleAudioOutputConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetCompatibleAudioDecoderConfigurations(struct soap*, struct _trt__GetCompatibleAudioDecoderConfigurations *trt__GetCompatibleAudioDecoderConfigurations, struct _trt__GetCompatibleAudioDecoderConfigurationsResponse *trt__GetCompatibleAudioDecoderConfigurationsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__SetVideoSourceConfiguration(struct soap*, struct _trt__SetVideoSourceConfiguration *trt__SetVideoSourceConfiguration, struct _trt__SetVideoSourceConfigurationResponse *trt__SetVideoSourceConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__SetVideoEncoderConfiguration(struct soap*, struct _trt__SetVideoEncoderConfiguration *trt__SetVideoEncoderConfiguration, struct _trt__SetVideoEncoderConfigurationResponse *trt__SetVideoEncoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__SetAudioSourceConfiguration(struct soap*, struct _trt__SetAudioSourceConfiguration *trt__SetAudioSourceConfiguration, struct _trt__SetAudioSourceConfigurationResponse *trt__SetAudioSourceConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__SetAudioEncoderConfiguration(struct soap*, struct _trt__SetAudioEncoderConfiguration *trt__SetAudioEncoderConfiguration, struct _trt__SetAudioEncoderConfigurationResponse *trt__SetAudioEncoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__SetVideoAnalyticsConfiguration(struct soap*, struct _trt__SetVideoAnalyticsConfiguration *trt__SetVideoAnalyticsConfiguration, struct _trt__SetVideoAnalyticsConfigurationResponse *trt__SetVideoAnalyticsConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__SetMetadataConfiguration(struct soap*, struct _trt__SetMetadataConfiguration *trt__SetMetadataConfiguration, struct _trt__SetMetadataConfigurationResponse *trt__SetMetadataConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__SetAudioOutputConfiguration(struct soap*, struct _trt__SetAudioOutputConfiguration *trt__SetAudioOutputConfiguration, struct _trt__SetAudioOutputConfigurationResponse *trt__SetAudioOutputConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__SetAudioDecoderConfiguration(struct soap*, struct _trt__SetAudioDecoderConfiguration *trt__SetAudioDecoderConfiguration, struct _trt__SetAudioDecoderConfigurationResponse *trt__SetAudioDecoderConfigurationResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetVideoSourceConfigurationOptions(struct soap*, struct _trt__GetVideoSourceConfigurationOptions *trt__GetVideoSourceConfigurationOptions, struct _trt__GetVideoSourceConfigurationOptionsResponse *trt__GetVideoSourceConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetVideoEncoderConfigurationOptions(struct soap*, struct _trt__GetVideoEncoderConfigurationOptions *trt__GetVideoEncoderConfigurationOptions, struct _trt__GetVideoEncoderConfigurationOptionsResponse *trt__GetVideoEncoderConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioSourceConfigurationOptions(struct soap*, struct _trt__GetAudioSourceConfigurationOptions *trt__GetAudioSourceConfigurationOptions, struct _trt__GetAudioSourceConfigurationOptionsResponse *trt__GetAudioSourceConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioEncoderConfigurationOptions(struct soap*, struct _trt__GetAudioEncoderConfigurationOptions *trt__GetAudioEncoderConfigurationOptions, struct _trt__GetAudioEncoderConfigurationOptionsResponse *trt__GetAudioEncoderConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetMetadataConfigurationOptions(struct soap*, struct _trt__GetMetadataConfigurationOptions *trt__GetMetadataConfigurationOptions, struct _trt__GetMetadataConfigurationOptionsResponse *trt__GetMetadataConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioOutputConfigurationOptions(struct soap*, struct _trt__GetAudioOutputConfigurationOptions *trt__GetAudioOutputConfigurationOptions, struct _trt__GetAudioOutputConfigurationOptionsResponse *trt__GetAudioOutputConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetAudioDecoderConfigurationOptions(struct soap*, struct _trt__GetAudioDecoderConfigurationOptions *trt__GetAudioDecoderConfigurationOptions, struct _trt__GetAudioDecoderConfigurationOptionsResponse *trt__GetAudioDecoderConfigurationOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetGuaranteedNumberOfVideoEncoderInstances(struct soap*, struct _trt__GetGuaranteedNumberOfVideoEncoderInstances *trt__GetGuaranteedNumberOfVideoEncoderInstances, struct _trt__GetGuaranteedNumberOfVideoEncoderInstancesResponse *trt__GetGuaranteedNumberOfVideoEncoderInstancesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetStreamUri(struct soap*, struct _trt__GetStreamUri *trt__GetStreamUri, struct _trt__GetStreamUriResponse *trt__GetStreamUriResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__StartMulticastStreaming(struct soap*, struct _trt__StartMulticastStreaming *trt__StartMulticastStreaming, struct _trt__StartMulticastStreamingResponse *trt__StartMulticastStreamingResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__StopMulticastStreaming(struct soap*, struct _trt__StopMulticastStreaming *trt__StopMulticastStreaming, struct _trt__StopMulticastStreamingResponse *trt__StopMulticastStreamingResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__SetSynchronizationPoint(struct soap*, struct _trt__SetSynchronizationPoint *trt__SetSynchronizationPoint, struct _trt__SetSynchronizationPointResponse *trt__SetSynchronizationPointResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetSnapshotUri(struct soap*, struct _trt__GetSnapshotUri *trt__GetSnapshotUri, struct _trt__GetSnapshotUriResponse *trt__GetSnapshotUriResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetVideoSourceModes(struct soap*, struct _trt__GetVideoSourceModes *trt__GetVideoSourceModes, struct _trt__GetVideoSourceModesResponse *trt__GetVideoSourceModesResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__SetVideoSourceMode(struct soap*, struct _trt__SetVideoSourceMode *trt__SetVideoSourceMode, struct _trt__SetVideoSourceModeResponse *trt__SetVideoSourceModeResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetOSDs(struct soap*, struct _trt__GetOSDs *trt__GetOSDs, struct _trt__GetOSDsResponse *trt__GetOSDsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetOSD(struct soap*, struct _trt__GetOSD *trt__GetOSD, struct _trt__GetOSDResponse *trt__GetOSDResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__GetOSDOptions(struct soap*, struct _trt__GetOSDOptions *trt__GetOSDOptions, struct _trt__GetOSDOptionsResponse *trt__GetOSDOptionsResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__SetOSD(struct soap*, struct _trt__SetOSD *trt__SetOSD, struct _trt__SetOSDResponse *trt__SetOSDResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__CreateOSD(struct soap*, struct _trt__CreateOSD *trt__CreateOSD, struct _trt__CreateOSDResponse *trt__CreateOSDResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 __trt__DeleteOSD(struct soap*, struct _trt__DeleteOSD *trt__DeleteOSD, struct _trt__DeleteOSDResponse *trt__DeleteOSDResponse);
+
+/******************************************************************************\
+ *                                                                            *
+ * Server-Side Skeletons to Invoke Service Operations                         *
+ *                                                                            *
+\******************************************************************************/
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve_request(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve_SOAP_ENV__Fault(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___wsdd__Hello(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___wsdd__Bye(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___wsdd__Probe(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___wsdd__ProbeMatches(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___wsdd__Resolve(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___wsdd__ResolveMatches(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tdn__Hello(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tdn__Bye(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tdn__Probe(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetServices(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetServiceCapabilities(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetDeviceInformation(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetSystemDateAndTime(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetSystemDateAndTime(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetSystemFactoryDefault(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__UpgradeSystemFirmware(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SystemReboot(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__RestoreSystem(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetSystemBackup(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetSystemLog(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetSystemSupportInformation(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetScopes(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetScopes(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__AddScopes(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__RemoveScopes(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetDiscoveryMode(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetDiscoveryMode(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetRemoteDiscoveryMode(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetRemoteDiscoveryMode(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetDPAddresses(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetEndpointReference(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetRemoteUser(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetRemoteUser(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetUsers(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__CreateUsers(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__DeleteUsers(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetUser(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetWsdlUrl(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetCapabilities(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetDPAddresses(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetHostname(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetHostname(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetHostnameFromDHCP(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetDNS(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetDNS(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetNTP(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetNTP(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetDynamicDNS(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetDynamicDNS(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetNetworkInterfaces(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetNetworkInterfaces(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetNetworkProtocols(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetNetworkProtocols(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetNetworkDefaultGateway(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetNetworkDefaultGateway(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetZeroConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetZeroConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetIPAddressFilter(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetIPAddressFilter(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__AddIPAddressFilter(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__RemoveIPAddressFilter(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetAccessPolicy(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetAccessPolicy(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__CreateCertificate(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetCertificates(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetCertificatesStatus(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetCertificatesStatus(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__DeleteCertificates(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetPkcs10Request(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__LoadCertificates(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetClientCertificateMode(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetClientCertificateMode(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetRelayOutputs(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetRelayOutputSettings(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetRelayOutputState(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SendAuxiliaryCommand(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetCACertificates(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__LoadCertificateWithPrivateKey(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetCertificateInformation(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__LoadCACertificates(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__CreateDot1XConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetDot1XConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetDot1XConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetDot1XConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__DeleteDot1XConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetDot11Capabilities(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetDot11Status(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__ScanAvailableDot11Networks(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetSystemUris(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__StartFirmwareUpgrade(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__StartSystemRestore(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetStorageConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__CreateStorageConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetStorageConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetStorageConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__DeleteStorageConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__GetGeoLocation(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__SetGeoLocation(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tds__DeleteGeoLocation(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__PullMessages(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__Seek(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__SetSynchronizationPoint(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__Unsubscribe(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__GetServiceCapabilities(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__CreatePullPointSubscription(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__GetEventProperties(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__Renew(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__Unsubscribe_(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__Subscribe(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__GetCurrentMessage(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__Notify(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__GetMessages(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__DestroyPullPoint(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__Notify_(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__CreatePullPoint(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__Renew_(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__Unsubscribe__(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__PauseSubscription(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__ResumeSubscription(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GetServiceCapabilities(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GetConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GetPresets(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__SetPreset(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__RemovePreset(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GotoPreset(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GetStatus(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GetConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GetNodes(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GetNode(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__SetConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GetConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GotoHomePosition(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__SetHomePosition(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__ContinuousMove(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__RelativeMove(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__SendAuxiliaryCommand(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__AbsoluteMove(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GeoMove(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__Stop(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GetPresetTours(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GetPresetTour(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GetPresetTourOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__CreatePresetTour(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__ModifyPresetTour(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__OperatePresetTour(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__RemovePresetTour(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tptz__GetCompatibleConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetServiceCapabilities(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__CreateProfile(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetProfiles(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__AddConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__RemoveConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__DeleteProfile(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetVideoSourceConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetVideoEncoderConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetAudioSourceConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetAudioEncoderConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetAnalyticsConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetMetadataConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetAudioOutputConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetAudioDecoderConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__SetVideoSourceConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__SetVideoEncoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__SetAudioSourceConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__SetAudioEncoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__SetMetadataConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__SetAudioOutputConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__SetAudioDecoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetVideoSourceConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetVideoEncoderConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetAudioSourceConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetAudioEncoderConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetMetadataConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetAudioOutputConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetAudioDecoderConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetVideoEncoderInstances(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetStreamUri(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__StartMulticastStreaming(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__StopMulticastStreaming(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__SetSynchronizationPoint(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetSnapshotUri(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetVideoSourceModes(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__SetVideoSourceMode(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetOSDs(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetOSDOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__SetOSD(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__CreateOSD(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__DeleteOSD(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetMasks(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__GetMaskOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__SetMask(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__CreateMask(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tr2__DeleteMask(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetServiceCapabilities(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetVideoSources(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioSources(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioOutputs(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__CreateProfile(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetProfile(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetProfiles(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__AddVideoEncoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__AddVideoSourceConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__AddAudioEncoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__AddAudioSourceConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__AddPTZConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__AddVideoAnalyticsConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__AddMetadataConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__AddAudioOutputConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__AddAudioDecoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__RemoveVideoEncoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__RemoveVideoSourceConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__RemoveAudioEncoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__RemoveAudioSourceConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__RemovePTZConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__RemoveVideoAnalyticsConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__RemoveMetadataConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__RemoveAudioOutputConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__RemoveAudioDecoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__DeleteProfile(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetVideoSourceConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetVideoEncoderConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioSourceConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioEncoderConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetVideoAnalyticsConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetMetadataConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioOutputConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioDecoderConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetVideoSourceConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetVideoEncoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioSourceConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioEncoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetVideoAnalyticsConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetMetadataConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioOutputConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioDecoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetCompatibleVideoEncoderConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetCompatibleVideoSourceConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetCompatibleAudioEncoderConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetCompatibleAudioSourceConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetCompatibleVideoAnalyticsConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetCompatibleMetadataConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetCompatibleAudioOutputConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetCompatibleAudioDecoderConfigurations(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__SetVideoSourceConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__SetVideoEncoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__SetAudioSourceConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__SetAudioEncoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__SetVideoAnalyticsConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__SetMetadataConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__SetAudioOutputConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__SetAudioDecoderConfiguration(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetVideoSourceConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetVideoEncoderConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioSourceConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioEncoderConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetMetadataConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioOutputConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetAudioDecoderConfigurationOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetGuaranteedNumberOfVideoEncoderInstances(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetStreamUri(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__StartMulticastStreaming(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__StopMulticastStreaming(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__SetSynchronizationPoint(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetSnapshotUri(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetVideoSourceModes(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__SetVideoSourceMode(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetOSDs(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetOSD(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__GetOSDOptions(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__SetOSD(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__CreateOSD(struct soap*);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___trt__DeleteOSD(struct soap*);
+
+/******************************************************************************\
+ *                                                                            *
  * Client-Side Call Stubs                                                     *
  *                                                                            *
 \******************************************************************************/

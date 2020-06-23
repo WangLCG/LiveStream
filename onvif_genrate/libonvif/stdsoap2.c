@@ -9191,6 +9191,7 @@ soap_versioning(soap_init)(struct soap *soap, soap_mode imode, soap_mode omode)
 #if !defined(WITH_LEAN) || defined(SOAP_DEBUG)
   soap_init_logs(soap);
 #endif
+/*
 #ifdef SOAP_DEBUG
 #ifdef TANDEM_NONSTOP
   soap_set_test_logfile(soap, "TESTLOG");
@@ -9202,6 +9203,7 @@ soap_versioning(soap_init)(struct soap *soap, soap_mode imode, soap_mode omode)
   soap_set_recv_logfile(soap, "RECV.log");
 #endif
 #endif
+*/
   soap->version = 0;
   soap_mode(soap, imode);
   soap_imode(soap, imode);
@@ -12515,7 +12517,7 @@ soap_s2byte(struct soap *soap, const char *s, char *p)
   { long n;
     char *r;
     n = soap_strtol(s, &r, 10);
-    if (s == r || *r || n < -128 || n > 127)
+    if (/*s == r || *r || */n < -128 || n > 127)
       soap->error = SOAP_TYPE;
     *p = (char)n;
   }
