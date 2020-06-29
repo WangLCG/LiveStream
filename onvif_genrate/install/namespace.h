@@ -26,6 +26,7 @@ SOAP_NMAC struct Namespace namespaces[] =
 	{"tds", "http://www.onvif.org/ver10/device/wsdl", NULL, NULL},
 	{"tev", "http://www.onvif.org/ver10/events/wsdl", NULL, NULL},
 	{"wsnt", "http://docs.oasis-open.org/wsn/b-2", NULL, NULL},
+	{"timg", "http://www.onvif.org/ver20/imaging/wsdl", NULL, NULL},
 	{"tptz", "http://www.onvif.org/ver20/ptz/wsdl", NULL, NULL},
 	{"tr2", "http://www.onvif.org/ver20/media/wsdl", NULL, NULL},
 	{"trt", "http://www.onvif.org/ver10/media/wsdl", NULL, NULL},

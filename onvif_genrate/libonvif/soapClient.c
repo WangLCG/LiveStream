@@ -17,7 +17,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 extern "C" {
 #endif
 
-SOAP_SOURCE_STAMP("@(#) soapClient.c ver 2.8.23 2020-06-22 11:39:49 GMT")
+SOAP_SOURCE_STAMP("@(#) soapClient.c ver 2.8.23 2020-06-29 02:31:47 GMT")
 
 
 SOAP_FMAC5 int SOAP_FMAC6 soap_send_SOAP_ENV__Fault(struct soap *soap, const char *soap_endpoint, const char *soap_action, char *faultcode, char *faultstring, char *faultactor, struct SOAP_ENV__Detail *detail, struct SOAP_ENV__Code *SOAP_ENV__Code, struct SOAP_ENV__Reason *SOAP_ENV__Reason, char *SOAP_ENV__Node, char *SOAP_ENV__Role, struct SOAP_ENV__Detail *SOAP_ENV__Detail)
@@ -5944,6 +5944,545 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_call___tev__ResumeSubscription(struct soap *soap,
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
 	soap_get__wsnt__ResumeSubscriptionResponse(soap, wsnt__ResumeSubscriptionResponse, "wsnt:ResumeSubscriptionResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___timg__GetServiceCapabilities(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _timg__GetServiceCapabilities *timg__GetServiceCapabilities, struct _timg__GetServiceCapabilitiesResponse *timg__GetServiceCapabilitiesResponse)
+{	struct __timg__GetServiceCapabilities soap_tmp___timg__GetServiceCapabilities;
+	if (soap_action == NULL)
+		soap_action = "http://www.onvif.org/ver20/imaging/wsdl/GetServiceCapabilities";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___timg__GetServiceCapabilities.timg__GetServiceCapabilities = timg__GetServiceCapabilities;
+	soap_serializeheader(soap);
+	soap_serialize___timg__GetServiceCapabilities(soap, &soap_tmp___timg__GetServiceCapabilities);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___timg__GetServiceCapabilities(soap, &soap_tmp___timg__GetServiceCapabilities, "-timg:GetServiceCapabilities", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___timg__GetServiceCapabilities(soap, &soap_tmp___timg__GetServiceCapabilities, "-timg:GetServiceCapabilities", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!timg__GetServiceCapabilitiesResponse)
+		return soap_closesock(soap);
+	soap_default__timg__GetServiceCapabilitiesResponse(soap, timg__GetServiceCapabilitiesResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__timg__GetServiceCapabilitiesResponse(soap, timg__GetServiceCapabilitiesResponse, "timg:GetServiceCapabilitiesResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___timg__GetImagingSettings(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _timg__GetImagingSettings *timg__GetImagingSettings, struct _timg__GetImagingSettingsResponse *timg__GetImagingSettingsResponse)
+{	struct __timg__GetImagingSettings soap_tmp___timg__GetImagingSettings;
+	if (soap_action == NULL)
+		soap_action = "http://www.onvif.org/ver20/imaging/wsdl/GetImagingSettings";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___timg__GetImagingSettings.timg__GetImagingSettings = timg__GetImagingSettings;
+	soap_serializeheader(soap);
+	soap_serialize___timg__GetImagingSettings(soap, &soap_tmp___timg__GetImagingSettings);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___timg__GetImagingSettings(soap, &soap_tmp___timg__GetImagingSettings, "-timg:GetImagingSettings", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___timg__GetImagingSettings(soap, &soap_tmp___timg__GetImagingSettings, "-timg:GetImagingSettings", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!timg__GetImagingSettingsResponse)
+		return soap_closesock(soap);
+	soap_default__timg__GetImagingSettingsResponse(soap, timg__GetImagingSettingsResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__timg__GetImagingSettingsResponse(soap, timg__GetImagingSettingsResponse, "timg:GetImagingSettingsResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___timg__SetImagingSettings(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _timg__SetImagingSettings *timg__SetImagingSettings, struct _timg__SetImagingSettingsResponse *timg__SetImagingSettingsResponse)
+{	struct __timg__SetImagingSettings soap_tmp___timg__SetImagingSettings;
+	if (soap_action == NULL)
+		soap_action = "http://www.onvif.org/ver20/imaging/wsdl/SetImagingSettings";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___timg__SetImagingSettings.timg__SetImagingSettings = timg__SetImagingSettings;
+	soap_serializeheader(soap);
+	soap_serialize___timg__SetImagingSettings(soap, &soap_tmp___timg__SetImagingSettings);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___timg__SetImagingSettings(soap, &soap_tmp___timg__SetImagingSettings, "-timg:SetImagingSettings", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___timg__SetImagingSettings(soap, &soap_tmp___timg__SetImagingSettings, "-timg:SetImagingSettings", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!timg__SetImagingSettingsResponse)
+		return soap_closesock(soap);
+	soap_default__timg__SetImagingSettingsResponse(soap, timg__SetImagingSettingsResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__timg__SetImagingSettingsResponse(soap, timg__SetImagingSettingsResponse, "timg:SetImagingSettingsResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___timg__GetOptions(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _timg__GetOptions *timg__GetOptions, struct _timg__GetOptionsResponse *timg__GetOptionsResponse)
+{	struct __timg__GetOptions soap_tmp___timg__GetOptions;
+	if (soap_action == NULL)
+		soap_action = "http://www.onvif.org/ver20/imaging/wsdl/GetOptions";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___timg__GetOptions.timg__GetOptions = timg__GetOptions;
+	soap_serializeheader(soap);
+	soap_serialize___timg__GetOptions(soap, &soap_tmp___timg__GetOptions);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___timg__GetOptions(soap, &soap_tmp___timg__GetOptions, "-timg:GetOptions", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___timg__GetOptions(soap, &soap_tmp___timg__GetOptions, "-timg:GetOptions", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!timg__GetOptionsResponse)
+		return soap_closesock(soap);
+	soap_default__timg__GetOptionsResponse(soap, timg__GetOptionsResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__timg__GetOptionsResponse(soap, timg__GetOptionsResponse, "timg:GetOptionsResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___timg__Move(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _timg__Move *timg__Move, struct _timg__MoveResponse *timg__MoveResponse)
+{	struct __timg__Move soap_tmp___timg__Move;
+	if (soap_action == NULL)
+		soap_action = "http://www.onvif.org/ver20/imaging/wsdl/Move";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___timg__Move.timg__Move = timg__Move;
+	soap_serializeheader(soap);
+	soap_serialize___timg__Move(soap, &soap_tmp___timg__Move);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___timg__Move(soap, &soap_tmp___timg__Move, "-timg:Move", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___timg__Move(soap, &soap_tmp___timg__Move, "-timg:Move", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!timg__MoveResponse)
+		return soap_closesock(soap);
+	soap_default__timg__MoveResponse(soap, timg__MoveResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__timg__MoveResponse(soap, timg__MoveResponse, "timg:MoveResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___timg__Stop(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _timg__Stop *timg__Stop, struct _timg__StopResponse *timg__StopResponse)
+{	struct __timg__Stop soap_tmp___timg__Stop;
+	if (soap_action == NULL)
+		soap_action = "http://www.onvif.org/ver20/imaging/wsdl/FocusStop";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___timg__Stop.timg__Stop = timg__Stop;
+	soap_serializeheader(soap);
+	soap_serialize___timg__Stop(soap, &soap_tmp___timg__Stop);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___timg__Stop(soap, &soap_tmp___timg__Stop, "-timg:Stop", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___timg__Stop(soap, &soap_tmp___timg__Stop, "-timg:Stop", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!timg__StopResponse)
+		return soap_closesock(soap);
+	soap_default__timg__StopResponse(soap, timg__StopResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__timg__StopResponse(soap, timg__StopResponse, "timg:StopResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___timg__GetStatus(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _timg__GetStatus *timg__GetStatus, struct _timg__GetStatusResponse *timg__GetStatusResponse)
+{	struct __timg__GetStatus soap_tmp___timg__GetStatus;
+	if (soap_action == NULL)
+		soap_action = "http://www.onvif.org/ver20/imaging/wsdl/GetStatus";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___timg__GetStatus.timg__GetStatus = timg__GetStatus;
+	soap_serializeheader(soap);
+	soap_serialize___timg__GetStatus(soap, &soap_tmp___timg__GetStatus);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___timg__GetStatus(soap, &soap_tmp___timg__GetStatus, "-timg:GetStatus", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___timg__GetStatus(soap, &soap_tmp___timg__GetStatus, "-timg:GetStatus", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!timg__GetStatusResponse)
+		return soap_closesock(soap);
+	soap_default__timg__GetStatusResponse(soap, timg__GetStatusResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__timg__GetStatusResponse(soap, timg__GetStatusResponse, "timg:GetStatusResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___timg__GetMoveOptions(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _timg__GetMoveOptions *timg__GetMoveOptions, struct _timg__GetMoveOptionsResponse *timg__GetMoveOptionsResponse)
+{	struct __timg__GetMoveOptions soap_tmp___timg__GetMoveOptions;
+	if (soap_action == NULL)
+		soap_action = "http://www.onvif.org/ver20/imaging/wsdl/GetMoveOptions";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___timg__GetMoveOptions.timg__GetMoveOptions = timg__GetMoveOptions;
+	soap_serializeheader(soap);
+	soap_serialize___timg__GetMoveOptions(soap, &soap_tmp___timg__GetMoveOptions);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___timg__GetMoveOptions(soap, &soap_tmp___timg__GetMoveOptions, "-timg:GetMoveOptions", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___timg__GetMoveOptions(soap, &soap_tmp___timg__GetMoveOptions, "-timg:GetMoveOptions", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!timg__GetMoveOptionsResponse)
+		return soap_closesock(soap);
+	soap_default__timg__GetMoveOptionsResponse(soap, timg__GetMoveOptionsResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__timg__GetMoveOptionsResponse(soap, timg__GetMoveOptionsResponse, "timg:GetMoveOptionsResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___timg__GetPresets(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _timg__GetPresets *timg__GetPresets, struct _timg__GetPresetsResponse *timg__GetPresetsResponse)
+{	struct __timg__GetPresets soap_tmp___timg__GetPresets;
+	if (soap_action == NULL)
+		soap_action = "http://www.onvif.org/ver20/imaging/wsdl/GetPresets";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___timg__GetPresets.timg__GetPresets = timg__GetPresets;
+	soap_serializeheader(soap);
+	soap_serialize___timg__GetPresets(soap, &soap_tmp___timg__GetPresets);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___timg__GetPresets(soap, &soap_tmp___timg__GetPresets, "-timg:GetPresets", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___timg__GetPresets(soap, &soap_tmp___timg__GetPresets, "-timg:GetPresets", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!timg__GetPresetsResponse)
+		return soap_closesock(soap);
+	soap_default__timg__GetPresetsResponse(soap, timg__GetPresetsResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__timg__GetPresetsResponse(soap, timg__GetPresetsResponse, "timg:GetPresetsResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___timg__GetCurrentPreset(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _timg__GetCurrentPreset *timg__GetCurrentPreset, struct _timg__GetCurrentPresetResponse *timg__GetCurrentPresetResponse)
+{	struct __timg__GetCurrentPreset soap_tmp___timg__GetCurrentPreset;
+	if (soap_action == NULL)
+		soap_action = "http://www.onvif.org/ver20/imaging/wsdl/GetCurrentPreset";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___timg__GetCurrentPreset.timg__GetCurrentPreset = timg__GetCurrentPreset;
+	soap_serializeheader(soap);
+	soap_serialize___timg__GetCurrentPreset(soap, &soap_tmp___timg__GetCurrentPreset);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___timg__GetCurrentPreset(soap, &soap_tmp___timg__GetCurrentPreset, "-timg:GetCurrentPreset", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___timg__GetCurrentPreset(soap, &soap_tmp___timg__GetCurrentPreset, "-timg:GetCurrentPreset", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!timg__GetCurrentPresetResponse)
+		return soap_closesock(soap);
+	soap_default__timg__GetCurrentPresetResponse(soap, timg__GetCurrentPresetResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__timg__GetCurrentPresetResponse(soap, timg__GetCurrentPresetResponse, "timg:GetCurrentPresetResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___timg__SetCurrentPreset(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _timg__SetCurrentPreset *timg__SetCurrentPreset, struct _timg__SetCurrentPresetResponse *timg__SetCurrentPresetResponse)
+{	struct __timg__SetCurrentPreset soap_tmp___timg__SetCurrentPreset;
+	if (soap_action == NULL)
+		soap_action = "http://www.onvif.org/ver20/imaging/wsdl/SetCurrentPreset";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___timg__SetCurrentPreset.timg__SetCurrentPreset = timg__SetCurrentPreset;
+	soap_serializeheader(soap);
+	soap_serialize___timg__SetCurrentPreset(soap, &soap_tmp___timg__SetCurrentPreset);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___timg__SetCurrentPreset(soap, &soap_tmp___timg__SetCurrentPreset, "-timg:SetCurrentPreset", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___timg__SetCurrentPreset(soap, &soap_tmp___timg__SetCurrentPreset, "-timg:SetCurrentPreset", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!timg__SetCurrentPresetResponse)
+		return soap_closesock(soap);
+	soap_default__timg__SetCurrentPresetResponse(soap, timg__SetCurrentPresetResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__timg__SetCurrentPresetResponse(soap, timg__SetCurrentPresetResponse, "timg:SetCurrentPresetResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)

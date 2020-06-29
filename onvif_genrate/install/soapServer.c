@@ -17,7 +17,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 extern "C" {
 #endif
 
-SOAP_SOURCE_STAMP("@(#) soapServer.c ver 2.8.23 2020-06-22 11:39:49 GMT")
+SOAP_SOURCE_STAMP("@(#) soapServer.c ver 2.8.23 2020-06-29 02:31:47 GMT")
 
 
 SOAP_FMAC5 int SOAP_FMAC6 soap_serve(struct soap *soap)
@@ -299,6 +299,28 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_serve_request(struct soap *soap)
 		return soap_serve___tev__PauseSubscription(soap);
 	if (!soap_match_tag(soap, soap->tag, "wsnt:ResumeSubscription"))
 		return soap_serve___tev__ResumeSubscription(soap);
+	if (!soap_match_tag(soap, soap->tag, "timg:GetServiceCapabilities"))
+		return soap_serve___timg__GetServiceCapabilities(soap);
+	if (!soap_match_tag(soap, soap->tag, "timg:GetImagingSettings"))
+		return soap_serve___timg__GetImagingSettings(soap);
+	if (!soap_match_tag(soap, soap->tag, "timg:SetImagingSettings"))
+		return soap_serve___timg__SetImagingSettings(soap);
+	if (!soap_match_tag(soap, soap->tag, "timg:GetOptions"))
+		return soap_serve___timg__GetOptions(soap);
+	if (!soap_match_tag(soap, soap->tag, "timg:Move"))
+		return soap_serve___timg__Move(soap);
+	if (!soap_match_tag(soap, soap->tag, "timg:Stop"))
+		return soap_serve___timg__Stop(soap);
+	if (!soap_match_tag(soap, soap->tag, "timg:GetStatus"))
+		return soap_serve___timg__GetStatus(soap);
+	if (!soap_match_tag(soap, soap->tag, "timg:GetMoveOptions"))
+		return soap_serve___timg__GetMoveOptions(soap);
+	if (!soap_match_tag(soap, soap->tag, "timg:GetPresets"))
+		return soap_serve___timg__GetPresets(soap);
+	if (!soap_match_tag(soap, soap->tag, "timg:GetCurrentPreset"))
+		return soap_serve___timg__GetCurrentPreset(soap);
+	if (!soap_match_tag(soap, soap->tag, "timg:SetCurrentPreset"))
+		return soap_serve___timg__SetCurrentPreset(soap);
 	if (!soap_match_tag(soap, soap->tag, "tptz:GetServiceCapabilities"))
 		return soap_serve___tptz__GetServiceCapabilities(soap);
 	if (!soap_match_tag(soap, soap->tag, "tptz:GetConfigurations"))
@@ -5288,6 +5310,457 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_serve___tev__ResumeSubscription(struct soap *soap
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
 	 || soap_put__wsnt__ResumeSubscriptionResponse(soap, &wsnt__ResumeSubscriptionResponse, "wsnt:ResumeSubscriptionResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___timg__GetServiceCapabilities(struct soap *soap)
+{	struct __timg__GetServiceCapabilities soap_tmp___timg__GetServiceCapabilities;
+	struct _timg__GetServiceCapabilitiesResponse timg__GetServiceCapabilitiesResponse;
+	soap_default__timg__GetServiceCapabilitiesResponse(soap, &timg__GetServiceCapabilitiesResponse);
+	soap_default___timg__GetServiceCapabilities(soap, &soap_tmp___timg__GetServiceCapabilities);
+	if (!soap_get___timg__GetServiceCapabilities(soap, &soap_tmp___timg__GetServiceCapabilities, "-timg:GetServiceCapabilities", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = __timg__GetServiceCapabilities(soap, soap_tmp___timg__GetServiceCapabilities.timg__GetServiceCapabilities, &timg__GetServiceCapabilitiesResponse);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize__timg__GetServiceCapabilitiesResponse(soap, &timg__GetServiceCapabilitiesResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put__timg__GetServiceCapabilitiesResponse(soap, &timg__GetServiceCapabilitiesResponse, "timg:GetServiceCapabilitiesResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put__timg__GetServiceCapabilitiesResponse(soap, &timg__GetServiceCapabilitiesResponse, "timg:GetServiceCapabilitiesResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___timg__GetImagingSettings(struct soap *soap)
+{	struct __timg__GetImagingSettings soap_tmp___timg__GetImagingSettings;
+	struct _timg__GetImagingSettingsResponse timg__GetImagingSettingsResponse;
+	soap_default__timg__GetImagingSettingsResponse(soap, &timg__GetImagingSettingsResponse);
+	soap_default___timg__GetImagingSettings(soap, &soap_tmp___timg__GetImagingSettings);
+	if (!soap_get___timg__GetImagingSettings(soap, &soap_tmp___timg__GetImagingSettings, "-timg:GetImagingSettings", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = __timg__GetImagingSettings(soap, soap_tmp___timg__GetImagingSettings.timg__GetImagingSettings, &timg__GetImagingSettingsResponse);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize__timg__GetImagingSettingsResponse(soap, &timg__GetImagingSettingsResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put__timg__GetImagingSettingsResponse(soap, &timg__GetImagingSettingsResponse, "timg:GetImagingSettingsResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put__timg__GetImagingSettingsResponse(soap, &timg__GetImagingSettingsResponse, "timg:GetImagingSettingsResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___timg__SetImagingSettings(struct soap *soap)
+{	struct __timg__SetImagingSettings soap_tmp___timg__SetImagingSettings;
+	struct _timg__SetImagingSettingsResponse timg__SetImagingSettingsResponse;
+	soap_default__timg__SetImagingSettingsResponse(soap, &timg__SetImagingSettingsResponse);
+	soap_default___timg__SetImagingSettings(soap, &soap_tmp___timg__SetImagingSettings);
+	if (!soap_get___timg__SetImagingSettings(soap, &soap_tmp___timg__SetImagingSettings, "-timg:SetImagingSettings", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = __timg__SetImagingSettings(soap, soap_tmp___timg__SetImagingSettings.timg__SetImagingSettings, &timg__SetImagingSettingsResponse);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize__timg__SetImagingSettingsResponse(soap, &timg__SetImagingSettingsResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put__timg__SetImagingSettingsResponse(soap, &timg__SetImagingSettingsResponse, "timg:SetImagingSettingsResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put__timg__SetImagingSettingsResponse(soap, &timg__SetImagingSettingsResponse, "timg:SetImagingSettingsResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___timg__GetOptions(struct soap *soap)
+{	struct __timg__GetOptions soap_tmp___timg__GetOptions;
+	struct _timg__GetOptionsResponse timg__GetOptionsResponse;
+	soap_default__timg__GetOptionsResponse(soap, &timg__GetOptionsResponse);
+	soap_default___timg__GetOptions(soap, &soap_tmp___timg__GetOptions);
+	if (!soap_get___timg__GetOptions(soap, &soap_tmp___timg__GetOptions, "-timg:GetOptions", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = __timg__GetOptions(soap, soap_tmp___timg__GetOptions.timg__GetOptions, &timg__GetOptionsResponse);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize__timg__GetOptionsResponse(soap, &timg__GetOptionsResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put__timg__GetOptionsResponse(soap, &timg__GetOptionsResponse, "timg:GetOptionsResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put__timg__GetOptionsResponse(soap, &timg__GetOptionsResponse, "timg:GetOptionsResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___timg__Move(struct soap *soap)
+{	struct __timg__Move soap_tmp___timg__Move;
+	struct _timg__MoveResponse timg__MoveResponse;
+	soap_default__timg__MoveResponse(soap, &timg__MoveResponse);
+	soap_default___timg__Move(soap, &soap_tmp___timg__Move);
+	if (!soap_get___timg__Move(soap, &soap_tmp___timg__Move, "-timg:Move", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = __timg__Move(soap, soap_tmp___timg__Move.timg__Move, &timg__MoveResponse);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize__timg__MoveResponse(soap, &timg__MoveResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put__timg__MoveResponse(soap, &timg__MoveResponse, "timg:MoveResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put__timg__MoveResponse(soap, &timg__MoveResponse, "timg:MoveResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___timg__Stop(struct soap *soap)
+{	struct __timg__Stop soap_tmp___timg__Stop;
+	struct _timg__StopResponse timg__StopResponse;
+	soap_default__timg__StopResponse(soap, &timg__StopResponse);
+	soap_default___timg__Stop(soap, &soap_tmp___timg__Stop);
+	if (!soap_get___timg__Stop(soap, &soap_tmp___timg__Stop, "-timg:Stop", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = __timg__Stop(soap, soap_tmp___timg__Stop.timg__Stop, &timg__StopResponse);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize__timg__StopResponse(soap, &timg__StopResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put__timg__StopResponse(soap, &timg__StopResponse, "timg:StopResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put__timg__StopResponse(soap, &timg__StopResponse, "timg:StopResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___timg__GetStatus(struct soap *soap)
+{	struct __timg__GetStatus soap_tmp___timg__GetStatus;
+	struct _timg__GetStatusResponse timg__GetStatusResponse;
+	soap_default__timg__GetStatusResponse(soap, &timg__GetStatusResponse);
+	soap_default___timg__GetStatus(soap, &soap_tmp___timg__GetStatus);
+	if (!soap_get___timg__GetStatus(soap, &soap_tmp___timg__GetStatus, "-timg:GetStatus", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = __timg__GetStatus(soap, soap_tmp___timg__GetStatus.timg__GetStatus, &timg__GetStatusResponse);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize__timg__GetStatusResponse(soap, &timg__GetStatusResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put__timg__GetStatusResponse(soap, &timg__GetStatusResponse, "timg:GetStatusResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put__timg__GetStatusResponse(soap, &timg__GetStatusResponse, "timg:GetStatusResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___timg__GetMoveOptions(struct soap *soap)
+{	struct __timg__GetMoveOptions soap_tmp___timg__GetMoveOptions;
+	struct _timg__GetMoveOptionsResponse timg__GetMoveOptionsResponse;
+	soap_default__timg__GetMoveOptionsResponse(soap, &timg__GetMoveOptionsResponse);
+	soap_default___timg__GetMoveOptions(soap, &soap_tmp___timg__GetMoveOptions);
+	if (!soap_get___timg__GetMoveOptions(soap, &soap_tmp___timg__GetMoveOptions, "-timg:GetMoveOptions", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = __timg__GetMoveOptions(soap, soap_tmp___timg__GetMoveOptions.timg__GetMoveOptions, &timg__GetMoveOptionsResponse);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize__timg__GetMoveOptionsResponse(soap, &timg__GetMoveOptionsResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put__timg__GetMoveOptionsResponse(soap, &timg__GetMoveOptionsResponse, "timg:GetMoveOptionsResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put__timg__GetMoveOptionsResponse(soap, &timg__GetMoveOptionsResponse, "timg:GetMoveOptionsResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___timg__GetPresets(struct soap *soap)
+{	struct __timg__GetPresets soap_tmp___timg__GetPresets;
+	struct _timg__GetPresetsResponse timg__GetPresetsResponse;
+	soap_default__timg__GetPresetsResponse(soap, &timg__GetPresetsResponse);
+	soap_default___timg__GetPresets(soap, &soap_tmp___timg__GetPresets);
+	if (!soap_get___timg__GetPresets(soap, &soap_tmp___timg__GetPresets, "-timg:GetPresets", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = __timg__GetPresets(soap, soap_tmp___timg__GetPresets.timg__GetPresets, &timg__GetPresetsResponse);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize__timg__GetPresetsResponse(soap, &timg__GetPresetsResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put__timg__GetPresetsResponse(soap, &timg__GetPresetsResponse, "timg:GetPresetsResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put__timg__GetPresetsResponse(soap, &timg__GetPresetsResponse, "timg:GetPresetsResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___timg__GetCurrentPreset(struct soap *soap)
+{	struct __timg__GetCurrentPreset soap_tmp___timg__GetCurrentPreset;
+	struct _timg__GetCurrentPresetResponse timg__GetCurrentPresetResponse;
+	soap_default__timg__GetCurrentPresetResponse(soap, &timg__GetCurrentPresetResponse);
+	soap_default___timg__GetCurrentPreset(soap, &soap_tmp___timg__GetCurrentPreset);
+	if (!soap_get___timg__GetCurrentPreset(soap, &soap_tmp___timg__GetCurrentPreset, "-timg:GetCurrentPreset", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = __timg__GetCurrentPreset(soap, soap_tmp___timg__GetCurrentPreset.timg__GetCurrentPreset, &timg__GetCurrentPresetResponse);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize__timg__GetCurrentPresetResponse(soap, &timg__GetCurrentPresetResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put__timg__GetCurrentPresetResponse(soap, &timg__GetCurrentPresetResponse, "timg:GetCurrentPresetResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put__timg__GetCurrentPresetResponse(soap, &timg__GetCurrentPresetResponse, "timg:GetCurrentPresetResponse", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_serve___timg__SetCurrentPreset(struct soap *soap)
+{	struct __timg__SetCurrentPreset soap_tmp___timg__SetCurrentPreset;
+	struct _timg__SetCurrentPresetResponse timg__SetCurrentPresetResponse;
+	soap_default__timg__SetCurrentPresetResponse(soap, &timg__SetCurrentPresetResponse);
+	soap_default___timg__SetCurrentPreset(soap, &soap_tmp___timg__SetCurrentPreset);
+	if (!soap_get___timg__SetCurrentPreset(soap, &soap_tmp___timg__SetCurrentPreset, "-timg:SetCurrentPreset", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = __timg__SetCurrentPreset(soap, soap_tmp___timg__SetCurrentPreset.timg__SetCurrentPreset, &timg__SetCurrentPresetResponse);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL;
+	soap_serializeheader(soap);
+	soap_serialize__timg__SetCurrentPresetResponse(soap, &timg__SetCurrentPresetResponse);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put__timg__SetCurrentPresetResponse(soap, &timg__SetCurrentPresetResponse, "timg:SetCurrentPresetResponse", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put__timg__SetCurrentPresetResponse(soap, &timg__SetCurrentPresetResponse, "timg:SetCurrentPresetResponse", NULL)
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))
