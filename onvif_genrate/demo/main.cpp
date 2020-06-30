@@ -18,6 +18,10 @@
 
 using namespace std;
 
+int ret = 0;
+char* user_name = "admin";
+char* passwd    = "admin";
+
 static void split(string src, char delim, vector<string>& array)
 {
     stringstream tmp_strream(src);
@@ -187,13 +191,12 @@ void test_discover()
     
 }
 
-int main(int argc,char *argv[])
+/* 获取Services */
+void GetServices()
 {
-    test_discover();
-
     int i = 0;
     int ret = 0;
-    char secvre_addr[] = "http://172.16.41.190/onvif/device_service"; //设备搜索获取得到的服务地址
+    char secvre_addr[] = "http://172.16.41.64/onvif/device_service"; //设备搜索获取得到的服务地址
     struct SOAP_ENV__Header header;
     struct _tds__GetServices tds__GetServices;
     struct _tds__GetServicesResponse tds__GetServicesResponse;
@@ -201,12 +204,9 @@ int main(int argc,char *argv[])
     struct soap* soap = ONVIF_Initsoap(&header, NULL, NULL, 5);
     soap->recv_timeout = 2;
 
-    //tds__GetServices->IncludeCapability = (enum xsd__boolean *)soap_malloc(soap, sizeof(int));
-    //*(tds__GetServices->IncludeCapability) = (enum xsd__boolean)0;
-    
     tds__GetServices.IncludeCapability = 0;
  
-    ONVIF_SetAuthInfo(soap,"admin","itc123456");  //鉴权
+    ONVIF_SetAuthInfo(soap,user_name,passwd);  //鉴权
     soap_call___tds__GetServices(soap,secvre_addr,NULL, &tds__GetServices, &tds__GetServicesResponse);
     if(soap->error)
     {
@@ -236,205 +236,455 @@ int main(int argc,char *argv[])
     }
  
     ONVIF_soap_delete(soap);
+}
 
-    /* 264 GetProfiles */
-    if(1)
-    {
-        char media_addr2[] = "http://172.16.41.190/onvif/Media"; //GetServices得到的地址
-        struct SOAP_ENV__Header header;  
-        struct soap* soap = ONVIF_Initsoap(&header, NULL, NULL, 5);
+void GetProfileUsedMedia()
+{
+    char media_addr2[] = "http://172.16.41.64/onvif/Media"; //GetServices得到的地址
+    struct SOAP_ENV__Header header;  
+    struct soap* soap = ONVIF_Initsoap(&header, NULL, NULL, 5);
+
+    struct _trt__GetProfiles getProfilesReq;                 //用于发送消息描述
+    struct _trt__GetProfilesResponse getProfilesResponse;    //请求消息的回应
     
-        struct _trt__GetProfiles getProfilesReq;                 //用于发送消息描述
-        struct _trt__GetProfilesResponse getProfilesResponse;    //请求消息的回应
-        
-        ONVIF_SetAuthInfo(soap,"admin","itc123456");  //鉴权
-        soap_call___trt__GetProfiles(soap, media_addr2, NULL, &getProfilesReq, &getProfilesResponse); 
-        if(soap->error)
-        {
-            //cout << "soap_call___trt__GetProfiles main soap error:"<< soap->error << *soap_faultcode(soap) <<
-            //            *soap_faultstring(soap) << endl;
-        }
-        else
-        {
-            do
-            {
-            //LOG_DEBUG<<"GetProfiles soap error:"<<pSoap->error<<" , "<<*soap_faultcode(pSoap)<<" , "<<*soap_faultstring(pSoap);
-                if(getProfilesResponse.Profiles == NULL){
-                    ret = -2;
-                    break;
-                }
-                //循环输出文件信息
-                for(int i = 0;i < getProfilesResponse.__sizeProfiles;i++,getProfilesResponse.Profiles++)
-                {
-
-                    if(strstr(getProfilesResponse.Profiles->Name,"test"))
-                     continue;
-
-                    string tmp;
-
-                    if(getProfilesResponse.Profiles->VideoEncoderConfiguration!=NULL)
-                    {
-                        cout <<"get video encoder configuretion "<< getProfilesResponse.Profiles->VideoEncoderConfiguration->Encoding << endl;
-                        tmp="h264";
-                    }
-                    else
-                    {
-                        tmp="h265";
-                    }
-
-                    //cout << "GET PROFILE ENCODE TYPE IS "<< tmp << endl;
-                    cout << "===== 264 profile name " << getProfilesResponse.Profiles->Name << " token " << getProfilesResponse.Profiles->token <<  endl;
-                }
-
-        }while(0);
-
-        }
-
-        ONVIF_soap_delete(soap);
+    ONVIF_SetAuthInfo(soap,user_name,passwd);  //鉴权
+    soap_call___trt__GetProfiles(soap, media_addr2, NULL, &getProfilesReq, &getProfilesResponse); 
+    if(soap->error)
+    {
+        //cout << "soap_call___trt__GetProfiles main soap error:"<< soap->error << *soap_faultcode(soap) <<
+        //            *soap_faultstring(soap) << endl;
     }
-
-    /* 265 getprofiles */
+    else
     {
-        char media_addr2[] = "http://172.16.41.190/onvif/Media2"; //GetServices得到的地址
-        struct SOAP_ENV__Header header;  
-        struct soap* soap = ONVIF_Initsoap(&header, NULL, NULL, 5);
-    
-        struct _tr2__GetProfiles tr2__GetProfiles;
-        struct _tr2__GetProfilesResponse tr2__GetProfilesResponse;
-        
-        tr2__GetProfiles.__sizeType = 1;
-        tr2__GetProfiles.Token = NULL;
-
-        char* type[1] = {"VideoEncoder"};
-        tr2__GetProfiles.Type = type;
-
-        ONVIF_SetAuthInfo(soap,"admin","itc123456");  //鉴权
-        soap_call___tr2__GetProfiles(soap, media_addr2, NULL, &tr2__GetProfiles, &tr2__GetProfilesResponse); 
-        if(soap->error)
+        do
         {
-                cout << "soap_call___tr2__GetProfiles main soap error:"<< soap->error << *soap_faultcode(soap) <<
-                         *soap_faultstring(soap) << endl;
-        }
-        else
-        {
-                if(tr2__GetProfilesResponse.Profiles == NULL)
+        //LOG_DEBUG<<"GetProfiles soap error:"<<pSoap->error<<" , "<<*soap_faultcode(pSoap)<<" , "<<*soap_faultstring(pSoap);
+            if(getProfilesResponse.Profiles == NULL){
+                ret = -2;
+                break;
+            }
+            //循环输出文件信息
+            for(int i = 0;i < getProfilesResponse.__sizeProfiles;i++,getProfilesResponse.Profiles++)
+            {
+
+                if(strstr(getProfilesResponse.Profiles->Name,"test"))
+                    continue;
+
+                string tmp;
+
+                if(getProfilesResponse.Profiles->VideoEncoderConfiguration!=NULL)
                 {
-                    ret = -2;
-                    
+                    cout <<"get video encoder configuretion "<< getProfilesResponse.Profiles->VideoEncoderConfiguration->Encoding << endl;
+                    tmp="h264";
                 }
                 else
                 {
-                    //循环输出文件信息
-                    for(int i = 0;i < tr2__GetProfilesResponse.__sizeProfiles;i++,tr2__GetProfilesResponse.Profiles++)
-                    {
-
-                        if(strstr(tr2__GetProfilesResponse.Profiles->Name,"test"))
-                            continue;
-
-                        string video_type =  tr2__GetProfilesResponse.Profiles->Configurations->VideoEncoder->Encoding;
-                        transform(video_type.begin(), video_type.end(), video_type.begin(), ::tolower);
-                        cout << "===== 265 profile name " << tr2__GetProfilesResponse.Profiles->Name << " token " << tr2__GetProfilesResponse.Profiles->token 
-                        <<  " video type " << video_type << endl;
-                    
-                    }
+                    tmp="h265";
                 }
 
-        }
+                //cout << "GET PROFILE ENCODE TYPE IS "<< tmp << endl;
+                cout << "===== 264 profile name " << getProfilesResponse.Profiles->Name << " token " << getProfilesResponse.Profiles->token <<  endl;
+            }
 
-        ONVIF_soap_delete(soap);
+    }while(0);
+
     }
 
+    ONVIF_soap_delete(soap);
+}
+
+void GetProfileUsedMedia2()
+{
+    char media_addr2[] = "http://172.16.41.64/onvif/Media2"; //GetServices得到的地址
+    struct SOAP_ENV__Header header;  
+    struct soap* soap = ONVIF_Initsoap(&header, NULL, NULL, 5);
+
+    struct _tr2__GetProfiles tr2__GetProfiles;
+    struct _tr2__GetProfilesResponse tr2__GetProfilesResponse;
+    
+    tr2__GetProfiles.__sizeType = 1;
+    tr2__GetProfiles.Token = NULL;
+
+    char* type[1] = {"VideoEncoder"};
+    tr2__GetProfiles.Type = type;
+
+    ONVIF_SetAuthInfo(soap,user_name,passwd);  //鉴权
+    soap_call___tr2__GetProfiles(soap, media_addr2, NULL, &tr2__GetProfiles, &tr2__GetProfilesResponse); 
+    if(soap->error)
     {
-        char media_addr2[] = "http://172.16.41.190/onvif/Media2"; //GetServices得到的地址
-        char taken[] = "Profile_1";   //get_profiles获取
-        struct SOAP_ENV__Header header;
-
-        struct soap* soap = ONVIF_Initsoap(&header, NULL, NULL, 5);
-        struct _tr2__GetStreamUri tr2__GetStreamUri;
-        struct _tr2__GetStreamUriResponse tr2__GetStreamUriResponse;
-        tr2__GetStreamUri.Protocol = (char *)soap_malloc(soap, 128*sizeof(char));
-        if (NULL == tr2__GetStreamUri.Protocol)
-        {
-            printf("soap_malloc is error\n");
-            ret = -1;
-        }
-
-        tr2__GetStreamUri.ProfileToken = (char *)soap_malloc(soap, 128*sizeof(char ));
-        if (NULL == tr2__GetStreamUri.ProfileToken)
-        {
-            printf("soap_malloc is error\n");
-            ret = -1;
-        }
-
-        strcpy(tr2__GetStreamUri.Protocol, "tcp");
-        strcpy(tr2__GetStreamUri.ProfileToken, taken);
-        ONVIF_SetAuthInfo(soap,"admin","itc123456");  //鉴权
-        soap_call___tr2__GetStreamUri(soap, media_addr2, NULL, &tr2__GetStreamUri, &tr2__GetStreamUriResponse);
-        if(soap->error)
-        {
-                cout << "soap_call___tr2__GetStreamUri main soap error:"<< soap->error << *soap_faultcode(soap) <<
-                         *soap_faultstring(soap) << endl;
-        }
-        else
-        {
-                cout << "media2 MediaUri->Uri=" <<  tr2__GetStreamUriResponse.Uri << endl;
-
-        }
-
-        ONVIF_soap_delete(soap);
+            cout << "soap_call___tr2__GetProfiles main soap error:"<< soap->error << *soap_faultcode(soap) <<
+                        *soap_faultstring(soap) << endl;
     }
-
+    else
     {
-        char media_addr2[] = "http://172.16.41.190/onvif/Media"; //GetServices得到的地址
-        char taken[] = "Profile_1";   //get_profiles获取
-        struct SOAP_ENV__Header header;
+            if(tr2__GetProfilesResponse.Profiles == NULL)
+            {
+                ret = -2;
+                
+            }
+            else
+            {
+                //循环输出文件信息
+                for(int i = 0;i < tr2__GetProfilesResponse.__sizeProfiles;i++,tr2__GetProfilesResponse.Profiles++)
+                {
 
-        struct soap* soap = ONVIF_Initsoap(&header, NULL, NULL, 5);
+                    if(strstr(tr2__GetProfilesResponse.Profiles->Name,"test"))
+                        continue;
 
-        struct _trt__GetStreamUri trt__GetStreamUri;
-        struct _trt__GetStreamUriResponse response;
-        trt__GetStreamUri.StreamSetup = (struct tt__StreamSetup*)soap_malloc(soap, sizeof(struct tt__StreamSetup));
-        if (NULL == trt__GetStreamUri.StreamSetup){
-            printf("soap_malloc is error\n");
-            ret = -1;
-        }
+                    string video_type =  tr2__GetProfilesResponse.Profiles->Configurations->VideoEncoder->Encoding;
+                    transform(video_type.begin(), video_type.end(), video_type.begin(), ::tolower);
+                    cout << "===== 265 profile name " << tr2__GetProfilesResponse.Profiles->Name << " token " << tr2__GetProfilesResponse.Profiles->token 
+                    <<  " video type " << video_type << endl;
+                
+                }
+            }
 
-        trt__GetStreamUri.StreamSetup->Stream = tt__StreamType__RTP_Unicast;
-        trt__GetStreamUri.StreamSetup->Transport = (struct tt__Transport *)soap_malloc(soap, sizeof(struct tt__Transport));
-        if (NULL == trt__GetStreamUri.StreamSetup->Transport)
-        {
-            printf("soap_malloc is error\n");
-            ret = -1;
-        }
-
-        trt__GetStreamUri.StreamSetup->Transport->Protocol = 1;
-        trt__GetStreamUri.StreamSetup->Transport->Tunnel = 0;
-        trt__GetStreamUri.StreamSetup->__size = 1;
-        trt__GetStreamUri.StreamSetup->__any = NULL;
-        trt__GetStreamUri.StreamSetup->__anyAttribute = NULL;
- 
-        trt__GetStreamUri.ProfileToken = (char *)soap_malloc(soap, 128*sizeof(char ));//
-        if (NULL == trt__GetStreamUri.ProfileToken){
-            printf("soap_malloc is error\n");
-                ret = -1;
-        }
-        strcpy(trt__GetStreamUri.ProfileToken, taken);
-
-        ONVIF_SetAuthInfo(soap,"admin","itc123456");  //鉴权
-        soap_call___trt__GetStreamUri(soap, media_addr2, NULL, &trt__GetStreamUri, &response);
-        if(soap->error)
-        {
-                cout << "GetStreamUri main soap error:"<< soap->error << *soap_faultcode(soap) <<
-                         *soap_faultstring(soap) << endl;
-        }
-        else
-        {
-                cout << " h264 main MediaUri->Uri=" <<  response.MediaUri->Uri << endl;
-
-        }
-
-        ONVIF_soap_delete(soap);
     }
 
-    return ret;
+    ONVIF_soap_delete(soap);
+}
+
+void GetUrlUsedMedia2()
+{
+    char media_addr2[] = "http://172.16.41.64/onvif/Media2"; //GetServices得到的地址
+    char taken[] = "Profile_1";   //get_profiles获取
+    struct SOAP_ENV__Header header;
+
+    struct soap* soap = ONVIF_Initsoap(&header, NULL, NULL, 5);
+    struct _tr2__GetStreamUri tr2__GetStreamUri;
+    struct _tr2__GetStreamUriResponse tr2__GetStreamUriResponse;
+    tr2__GetStreamUri.Protocol = (char *)soap_malloc(soap, 128*sizeof(char));
+    if (NULL == tr2__GetStreamUri.Protocol)
+    {
+        printf("soap_malloc is error\n");
+        ret = -1;
+    }
+
+    tr2__GetStreamUri.ProfileToken = (char *)soap_malloc(soap, 128*sizeof(char ));
+    if (NULL == tr2__GetStreamUri.ProfileToken)
+    {
+        printf("soap_malloc is error\n");
+        ret = -1;
+    }
+
+    strcpy(tr2__GetStreamUri.Protocol, "tcp");
+    strcpy(tr2__GetStreamUri.ProfileToken, taken);
+    ONVIF_SetAuthInfo(soap,user_name,passwd);  //鉴权
+    soap_call___tr2__GetStreamUri(soap, media_addr2, NULL, &tr2__GetStreamUri, &tr2__GetStreamUriResponse);
+    if(soap->error)
+    {
+            cout << "soap_call___tr2__GetStreamUri main soap error:"<< soap->error << *soap_faultcode(soap) <<
+                        *soap_faultstring(soap) << endl;
+    }
+    else
+    {
+            cout << "media2 MediaUri->Uri=" <<  tr2__GetStreamUriResponse.Uri << endl;
+
+    }
+
+    ONVIF_soap_delete(soap);
+}
+
+void GetUrlUsedMedia()
+{
+    char media_addr2[] = "http://172.16.41.64/onvif/Media"; //GetServices得到的地址
+    char taken[] = "Profile_1";   //get_profiles获取
+    struct SOAP_ENV__Header header;
+
+    struct soap* soap = ONVIF_Initsoap(&header, NULL, NULL, 5);
+
+    struct _trt__GetStreamUri trt__GetStreamUri;
+    struct _trt__GetStreamUriResponse response;
+    trt__GetStreamUri.StreamSetup = (struct tt__StreamSetup*)soap_malloc(soap, sizeof(struct tt__StreamSetup));
+    if (NULL == trt__GetStreamUri.StreamSetup)
+    {
+        printf("soap_malloc is error\n");
+        ret = -1;
+    }
+
+    trt__GetStreamUri.StreamSetup->Stream = tt__StreamType__RTP_Unicast;
+    trt__GetStreamUri.StreamSetup->Transport = (struct tt__Transport *)soap_malloc(soap, sizeof(struct tt__Transport));
+    if (NULL == trt__GetStreamUri.StreamSetup->Transport)
+    {
+        printf("soap_malloc is error\n");
+        ret = -1;
+    }
+
+    trt__GetStreamUri.StreamSetup->Transport->Protocol = 1;
+    trt__GetStreamUri.StreamSetup->Transport->Tunnel = 0;
+    trt__GetStreamUri.StreamSetup->__size = 1;
+    trt__GetStreamUri.StreamSetup->__any = NULL;
+    trt__GetStreamUri.StreamSetup->__anyAttribute = NULL;
+
+    trt__GetStreamUri.ProfileToken = (char *)soap_malloc(soap, 128*sizeof(char ));//
+    if (NULL == trt__GetStreamUri.ProfileToken){
+        printf("soap_malloc is error\n");
+            ret = -1;
+    }
+    strcpy(trt__GetStreamUri.ProfileToken, taken);
+
+    ONVIF_SetAuthInfo(soap,user_name,passwd);  //鉴权
+    soap_call___trt__GetStreamUri(soap, media_addr2, NULL, &trt__GetStreamUri, &response);
+    if(soap->error)
+    {
+            cout << "GetStreamUri main soap error:"<< soap->error << *soap_faultcode(soap) <<
+                        *soap_faultstring(soap) << endl;
+    }
+    else
+    {
+            cout << " h264 main MediaUri->Uri=" <<  response.MediaUri->Uri << endl;
+
+    }
+
+    ONVIF_soap_delete(soap);
+}
+
+
+string ptzurl;  /* ptz控制url */
+string mediaUrl; /* media service url */
+string imagingUrl;
+void GetCapability(char* ip, int port)
+{
+    if(!ip) 
+        return -1;
+    
+    char soap_endpoint[64] = {0};
+
+    struct SOAP_ENV__Header header;
+    struct _tds__GetCapabilities capa_req;
+    struct _tds__GetCapabilitiesResponse capa_resp;
+    //struct SOAP_ENV__Header header;
+    struct soap* pSoap = ONVIF_Initsoap(&header, NULL, NULL, 5);
+    pSoap->recv_timeout = 2;
+
+    ONVIF_SetAuthInfo(pSoap, user_name, passwd);  //鉴权
+
+    if(0 == port)
+    {
+        sprintf(soap_endpoint,"http://%s/onvif/device_service",ip);
+    }
+    else
+    {
+        sprintf(soap_endpoint,"http://%s:%d/onvif/device_service", ip, port);
+    }
+
+    capa_req.Category=(enum tt__CapabilityCategory *)soap_malloc(pSoap, sizeof(int));
+    capa_req.__sizeCategory = 1;
+    *capa_req.Category=(enum tt__CapabilityCategory)0;
+    capa_resp.Capabilities=(struct tt__Capabilities*)soap_malloc(pSoap,sizeof(struct tt__Capabilities)) ;
+
+    int ret=soap_call___tds__GetCapabilities(pSoap,soap_endpoint, NULL, &capa_req, &capa_resp);
+    if(pSoap->error)
+    {
+        //
+        cout <<"getCapabilities 2 error:"<< pSoap->error;
+        ret = pSoap->error;
+    }
+    else
+    {
+        if(capa_resp.Capabilities->Media)
+        {
+            cout << "get the capabilities is "<< capa_resp.Capabilities->Media->XAddr << endl;
+            mediaUrl=string(capa_resp.Capabilities->Media->XAddr);
+        }
+
+        if(capa_resp.Capabilities->PTZ)
+        {
+            cout << "get the capabilities is "<< capa_resp.Capabilities->PTZ->XAddr << endl;
+            ptzurl=string(capa_resp.Capabilities->PTZ->XAddr);
+        }
+
+        if(capa_resp.Capabilities->Imaging)
+        {
+            cout << "get the capabilities is "<< capa_resp.Capabilities->Imaging->XAddr << endl;
+            imagingUrl = string(capa_resp.Capabilities->Imaging->XAddr);
+        }
+
+        ret = SOAP_OK;
+    }
+
+    ONVIF_soap_delete(pSoap);
+
+}
+
+typedef enum
+{
+    PTZ_CMD_LEFT,
+    PTZ_CMD_RIGHT,
+    PTZ_CMD_UP,
+    PTZ_CMD_DOWN,
+    PTZ_CMD_ZOOM_NEAR,
+    PTZ_CMD_ZOOM_FAR,
+}PTZCMD;
+
+void ptzContinueMove(int cmd , int speed)
+{
+    if(ptzurl.empty())
+    {
+        printf("ptzContinueMove ptzurl is empty \n");
+        return;
+    }
+    
+    struct SOAP_ENV__Header header;
+    struct soap* soap = ONVIF_Initsoap(&header, NULL, NULL, 5);
+    const int RECV_MAX_TIME = 2;
+    soap->recv_timeout = RECV_MAX_TIME;
+    soap->send_timeout = RECV_MAX_TIME;
+    soap->connect_timeout = RECV_MAX_TIME;
+
+    int speed_x=0;
+    int speed_y=0;
+    int speed_z=0;
+
+    struct _tptz__ContinuousMove                continuousMove;
+    struct _tptz__ContinuousMoveResponse        continuousMoveresponse;
+
+    LONG64 timeout = 2;
+    continuousMove.Timeout = &timeout;
+    char ProfileToken[32] = {0};
+    strncpy(ProfileToken, "MainProfileToken", sizeof(ProfileToken));
+    continuousMove.ProfileToken = ProfileToken;
+
+    struct tt__PTZSpeed* velocity = (struct tt__PTZSpeed*)soap_malloc(soap, sizeof(struct tt__PTZSpeed));
+    continuousMove.Velocity = velocity;
+
+    struct tt__Vector2D* panTilt = (struct tt__Vector2D*)soap_malloc(soap, sizeof(struct tt__Vector2D));
+    continuousMove.Velocity->PanTilt = panTilt;
+
+    continuousMove.Velocity->PanTilt->space = NULL;
+
+    if(cmd >= PTZ_CMD_ZOOM_NEAR)
+    {
+        struct tt__Vector1D* zoom = (struct tt__Vector1D*)soap_malloc(soap, sizeof(struct tt__Vector1D));
+        continuousMove.Velocity->Zoom = zoom;
+        continuousMove.Velocity->PanTilt->x = (float)speed_x / 100;
+        continuousMove.Velocity->PanTilt->y = (float) speed_y / 100;
+        continuousMove.Velocity->Zoom->x = (float)speed_z / 100;
+
+        continuousMove.Velocity->Zoom->space = NULL;
+    }
+
+    switch (cmd)
+    {
+        case PTZ_CMD_LEFT:
+            continuousMove.Velocity->PanTilt->x = -((float)speed / 100);
+            break;
+
+        case PTZ_CMD_RIGHT:
+            continuousMove.Velocity->PanTilt->x = (float)speed / 100;
+            //continuousMove.Velocity->PanTilt->y = 0;
+            break;
+        case PTZ_CMD_UP:
+            //continuousMove.Velocity->PanTilt->x = 0;
+            continuousMove.Velocity->PanTilt->y = (float)speed / 100;
+            break;
+
+        case PTZ_CMD_DOWN:
+            //continuousMove.Velocity->PanTilt->x = 0;
+            continuousMove.Velocity->PanTilt->y = -((float)speed / 100);
+            break;
+        
+            // 缩小
+        case PTZ_CMD_ZOOM_NEAR:
+            continuousMove.Velocity->Zoom->x = -((float)speed / 100);
+            break;
+
+        // 放大
+        case PTZ_CMD_ZOOM_FAR:
+            continuousMove.Velocity->Zoom->x = (float)speed / 100;
+            break;
+
+        default:
+            break;
+    }
+
+    char soap_endpoint[64] = {0};
+    sprintf(soap_endpoint, "%s", ptzurl.c_str());
+    printf("ptz_url: %s \n", soap_endpoint);
+
+    ONVIF_SetAuthInfo(soap, user_name, passwd);  //鉴权
+    if(soap_call___tptz__ContinuousMove(soap, soap_endpoint, NULL, &continuousMove, &continuousMoveresponse) == SOAP_OK)
+    {
+        printf("======SetPTZcontinuous_move is success!!!=======\n");
+    }
+    else
+    {
+        printf("======SetPTZcontinuous_move is faile!!!=======\n");
+        printf("soap_call___tptz__ContinuousMove soap error: %d, %s, %s\n", soap->error, *soap_faultcode(soap), *soap_faultstring(soap));
+    }
+
+    ONVIF_soap_delete(soap);
+
+}
+
+void StopPTZ()
+{
+    if(ptzurl.empty())
+     {
+        printf("StopPTZ ptzurl is empty \n");
+        return;
+    }
+    
+    struct SOAP_ENV__Header header;
+    struct soap* soap = ONVIF_Initsoap(&header, NULL, NULL, 5);
+    const int RECV_MAX_TIME = 10;
+    soap->recv_timeout = RECV_MAX_TIME;
+    soap->send_timeout = RECV_MAX_TIME;
+    soap->connect_timeout = RECV_MAX_TIME;
+
+    //ONVIF_SetAuthInfo(soap, user_name, passwd);  //鉴权
+
+    //char ProfileToken[32] = {0};
+    //strncpy(ProfileToken, sProfileToken.c_str(), sizeof(ProfileToken));
+
+    _tptz__Stop* stop = (struct _tptz__Stop*)soap_malloc(soap, sizeof(struct _tptz__Stop));
+    _tptz__StopResponse* stopResponse = (struct _tptz__StopResponse*)soap_malloc(soap, sizeof(struct _tptz__StopResponse));
+
+    char ProfileToken[32] = {0};
+    strncpy(ProfileToken, "MainProfileToken", sizeof(ProfileToken));
+    stop->ProfileToken = ProfileToken;
+
+    stop->PanTilt = (xsd__boolean*)soap_malloc(soap, sizeof(xsd__boolean));
+    *(stop->PanTilt) = xsd__boolean__true_;
+    stop->Zoom = (xsd__boolean*)soap_malloc(soap, sizeof(xsd__boolean));
+    *(stop->Zoom) = xsd__boolean__true_;
+
+    char soap_endpoint[64] = {0};
+    sprintf(soap_endpoint, "%s", ptzurl.c_str());
+
+    ONVIF_SetAuthInfo(soap, user_name, passwd);  //鉴权
+    if (SOAP_OK == soap_call___tptz__Stop(soap, soap_endpoint, NULL, stop, stopResponse))
+    {
+       
+        printf("======ptzProxy->Stop is success!!!=======\n");
+    }
+    else
+    {
+        printf("======ptzProxy->Stop is faile!!!=======\n");
+        printf("soap_call___tptz__Stop soap error: %d, %s, %s\n", soap->error, *soap_faultcode(soap), *soap_faultstring(soap));
+    }
+
+    ONVIF_soap_delete(soap);
+}
+
+int main(int argc,char *argv[])
+{
+    char* ip = "172.16.41.64";
+    int port = 0;
+
+    test_discover();
+    GetServices();
+    GetCapability(ip, port);
+
+    //GetProfileUsedMedia2();
+    GetProfileUsedMedia();
+
+    int cmd = PTZ_CMD_UP;
+    int speed = 20;
+    ptzContinueMove(cmd, speed);
+
+    usleep(150*1000);
+    StopPTZ();
+
+    return 0;
 }
